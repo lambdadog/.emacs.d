@@ -38,6 +38,9 @@
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
+[submodule "solaire-mode"]
+	path = lib/solaire-mode
+	url = git@github.com:hlissner/emacs-solaire-mode.git
 [submodule "transient"]
 	path = lib/transient
 	url = git@github.com:magit/transient.git
