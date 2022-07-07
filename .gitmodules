@@ -1,3 +1,16 @@
 [submodule "borg"]
 	path = lib/borg
 	url = git@github.com:emacscollective/borg.git
+[submodule "compat"]
+	path = lib/compat
+	url = https://git.sr.ht/~pkal/compat
+[submodule "emacsql"]
+	path = lib/emacsql
+	url = git@github.com:skeeto/emacsql.git
+	no-byte-compile = emacsql-pg.el
+[submodule "closql"]
+	path = lib/closql
+	url = git@github.com:emacscollective/closql.git
+[submodule "epkg"]
+	path = lib/epkg
+	url = git@github.com:emacscollective/epkg.git
