@@ -13,6 +13,9 @@
 [submodule "dash"]
 	path = lib/dash
 	url = git@github.com:magnars/dash.el.git
+[submodule "dashboard"]
+	path = lib/dashboard
+	url = git@github.com:emacs-dashboard/emacs-dashboard.git
 [submodule "doom-themes"]
 	path = lib/doom-themes
 	url = git@github.com:doomemacs/themes.git
