@@ -2,15 +2,14 @@
 (setq user-init-file (or load-file-name buffer-file-name))
 (setq user-emacs-directory (file-name-directory user-init-file))
 
-;;; Not added yet
-;; (progn ;; auto-compile
-;;   (setq load-prefer-newer t)
-;;   (add-to-list 'load-path (expand-file-name "lib/compat/"       user-emacs-directory))
-;;   (add-to-list 'load-path (expand-file-name "lib/packed/"       user-emacs-directory))
-;;   (add-to-list 'load-path (expand-file-name "lib/auto-compile/" user-emacs-directory))
-;;   (require 'auto-compile)
-;;   (auto-compile-on-load-mode)
-;;   (auto-compile-on-save-mode))
+(progn ;; auto-compile
+  (setq load-prefer-newer t)
+  (add-to-list 'load-path (expand-file-name "lib/compat/"       user-emacs-directory))
+  (add-to-list 'load-path (expand-file-name "lib/packed/"       user-emacs-directory))
+  (add-to-list 'load-path (expand-file-name "lib/auto-compile/" user-emacs-directory))
+  (require 'auto-compile)
+  (auto-compile-on-load-mode)
+  (auto-compile-on-save-mode))
 
 (progn ;; package.el
   (setq package-enable-at-startup nil)

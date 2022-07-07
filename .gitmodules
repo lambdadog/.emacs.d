@@ -1,3 +1,6 @@
+[submodule "auto-compile"]
+	path = lib/auto-compile
+	url = git@github.com:emacscollective/auto-compile.git
 [submodule "borg"]
 	path = lib/borg
 	url = git@github.com:emacscollective/borg.git
@@ -26,6 +29,9 @@
 [submodule "org"]
 	path = lib/org
 	url = git@github.com:emacsmirror/org.git
+[submodule "packed"]
+	path = lib/packed
+	url = git@github.com:emacscollective/packed.git
 [submodule "transient"]
 	path = lib/transient
 	url = git@github.com:magit/transient.git
