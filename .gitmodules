@@ -23,6 +23,9 @@
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
+[submodule "ligature"]
+	path = lib/ligature
+	url = git@github.com:mickeynp/ligature.el
 [submodule "magit"]
 	path = lib/magit
 	url = git@github.com:magit/magit.git
