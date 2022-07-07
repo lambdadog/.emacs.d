@@ -37,10 +37,10 @@
   (setq inhibit-startup-screen t)
   (setq inhibit-startup-echo-area-message user-login-name)
 
-  ;;; Not added yet
-  ;; (add-to-list 'load-path (expand-file-name "lib/doom-themes/" user-emacs-directory))
-  ;; (require 'doom-opera-light-theme)
-  ;; (load-theme 'doom-opera-light 'no-confirm)
+  (add-to-list 'load-path (expand-file-name "lib/doom-themes/" user-emacs-directory))
+  (add-to-list 'load-path (expand-file-name "lib/doom-themes/themes/" user-emacs-directory))
+  (require 'doom-opera-light-theme)
+  (load-theme 'doom-opera-light 'no-confirm)
 
   (when (fboundp 'pixel-scroll-precision-mode)
     (pixel-scroll-precision-mode 1)))
