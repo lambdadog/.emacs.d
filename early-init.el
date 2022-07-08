@@ -16,10 +16,10 @@
 
   (defun package--ensure-init-file/:override ())
   (advice-add #'package--ensure-init-file :override
-	      #'package--ensure-init-file/:override)
+              #'package--ensure-init-file/:override)
   (defun package--save-selected-packages/:override (&optional _))
   (advice-add #'package--save-selected-packages :override
-	      #'package--save-selected-packages/:override))
+              #'package--save-selected-packages/:override))
 
 (progn ;; early customizations to avoid the emacs flash
   (when (fboundp 'scroll-bar-mode)
