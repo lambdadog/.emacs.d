@@ -4,4 +4,7 @@ a use-case for.
 ** [[https://github.com/radian-software/apheleia][Apheleia]]
 Seems like the perfect code formatter integration, but I don't
 currently have anything like that set up in my config.
+** [[https://depp.brause.cc/shackle/][Shackle]]
+Seems very useful but also very complex to use effectively. Worth some
+investigation.
 
