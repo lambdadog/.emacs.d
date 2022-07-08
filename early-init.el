@@ -47,7 +47,4 @@
   (setq doom-opera-light-padded-modeline t)
   (load-theme 'doom-opera-light 'no-confirm)
 
-  (set-face-attribute 'default nil :font "Fira Code")
-
-  (when (fboundp 'pixel-scroll-precision-mode)
-    (pixel-scroll-precision-mode 1)))
+  (set-face-attribute 'default nil :font "Fira Code"))

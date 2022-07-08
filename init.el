@@ -20,7 +20,7 @@
   (borg-initialize))
 
 (eval-and-compile ;; use-package
-  (require 'use-package)
+  (require 'use-package)(ctrlf-mode +1)
   (setq use-package-verbose t)
   (setq use-package-always-defer t))
 
@@ -60,6 +60,7 @@
   (display-line-numbers-width 3)
   (display-line-numbers-current-absolute nil)
   :config
+  ;; TODO: inherit from `solaire-default-face'
   (set-face-background 'line-number-current-line "#eeeeee")
   (set-face-background 'line-number "#eeeeee"))
 
@@ -77,6 +78,9 @@
 	 (solaire-mode-real-buffer-p)
 	 (string= (buffer-name) "*dashboard*"))))
   :config
+  ;; TODO: inherit from `solaire-default-face'
+  (set-face-foreground 'vertical-border "#eeeeee")
+  (set-face-background 'vertical-border "#eeeeee")
   (dolist (face '(mode-line mode-line-active mode-line-inactive))
     (setf (alist-get face solaire-mode-remap-alist) nil))
   (solaire-global-mode +1))
@@ -97,6 +101,7 @@
   :config
   (dashboard-setup-startup-hook))
 
-(use-package ctrlf
-  :config
-  (ctrlf-mode +1))
+;; CTRLF-mode has autoload configured in a way that doesn't actually
+;; load the package upon ctrlf-mode being enabled
+(use-package ctrlf)
+(ctrlf-mode +1)
