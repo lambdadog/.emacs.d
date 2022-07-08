@@ -96,3 +96,7 @@
    (lambda () (get-buffer-create "*dashboard*")))
   :config
   (dashboard-setup-startup-hook))
+
+(use-package ctrlf
+  :config
+  (ctrlf-mode +1))
