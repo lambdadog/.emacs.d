@@ -1,10 +1,20 @@
 let
   sources = import ./nix/sources.nix;
-  pkgs = import sources.nixpkgs {
-    overlays = [
-      (import sources.emacs-overlay)
-    ];
-  };
+  pkgs = import sources.nixpkgs {};
 in {
-  emacs = pkgs.emacsPgtk;
+  emacs = pkgs.emacs.overrideAttrs (old: {
+    # TODO: figure out how to get version
+    name = "emacs-lambdadog";
+    srcRepo = true;
+    src = ./emacs;
+
+    dontStrip = true;
+    enableDebugging = true;
+
+    postPatch = old.postPatch + ''
+      substituteInPlace lisp/loadup.el \
+        --replace '(emacs-repository-get-version)' '"29-lambdadog"' \
+        --replace '(emacs-repository-get-branch)' '"lambdadog"'
+    '';
+  });
 }

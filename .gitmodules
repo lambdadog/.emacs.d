@@ -62,3 +62,6 @@
 [submodule "with-editor"]
 	path = lib/with-editor
 	url = git@github.com:magit/with-editor.git
+[submodule "emacs"]
+	path = emacs
+	url = git@github.com:lambdadog/emacs.git
