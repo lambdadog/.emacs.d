@@ -5,12 +5,12 @@
 (progn ;; disable customize
   ;; https://github.com/doomemacs/doomemacs/blob/35865ef5e89442e3809b8095199977053dd4210f/core/core-ui.el#L628-L639
   (dolist (sym '(customize-option customize-browse customize-group customize-face
-                                  customize-rogue customize-saved customize-apropos
-                                  customize-changed customize-unsaved customize-variable
-                                  customize-set-value customize-customized customize-set-variable
-                                  customize-apropos-faces customize-save-variable
-                                  customize-apropos-groups customize-apropos-options
-                                  customize-changed-options customize-save-customized))
+				  customize-rogue customize-saved customize-apropos
+				  customize-changed customize-unsaved customize-variable
+				  customize-set-value customize-customized customize-set-variable
+				  customize-apropos-faces customize-save-variable
+				  customize-apropos-groups customize-apropos-options
+				  customize-changed-options customize-save-customized))
     (put sym 'disabled nil))
   (put 'customize-themes 'disabled nil))
 
@@ -53,8 +53,6 @@
    . (lambda ()
        (setq-local left-margin-width 0)
        (setq-local line-prefix " ")
-       ;; Necessary so line-prefix doesn't make tab rendering weird
-       (setq-local indent-tabs-mode nil)
        (set-window-buffer nil (current-buffer))
        (display-line-numbers-mode +1)))
   :custom
@@ -77,8 +75,8 @@
   (solaire-mode-real-buffer-fn
    (lambda ()
      (or (minibufferp)
-         (solaire-mode-real-buffer-p)
-         (string= (buffer-name) "*dashboard*"))))
+	 (solaire-mode-real-buffer-p)
+	 (string= (buffer-name) "*dashboard*"))))
   :config
   ;; TODO: inherit from `solaire-default-face'
   (set-face-foreground 'vertical-border "#eeeeee")
