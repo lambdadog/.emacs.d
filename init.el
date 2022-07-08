@@ -46,6 +46,28 @@
   (add-to-list 'recentf-exclude no-littering-var-directory)
   (add-to-list 'recentf-exclude no-littering-etc-directory))
 
+(use-package display-line-numbers
+  :demand t
+  :hook
+  (prog-mode
+   . (lambda ()
+       (setq-local left-margin-width 0)
+       (setq-local line-prefix " ")
+       (set-window-buffer nil (current-buffer))
+       (display-line-numbers-mode +1)))
+  :custom
+  (display-line-numbers-type 'relative)
+  (display-line-numbers-width-start 99)
+  (display-line-numbers-current-absolute nil)
+  :config
+  (set-face-background 'line-number-current-line "#eeeeee")
+  (set-face-background 'line-number "#eeeeee"))
+
+(use-package mood-line
+  :demand t
+  :config
+  (mood-line-mode))
+
 (use-package solaire-mode
   :demand t
   :custom
@@ -55,6 +77,8 @@
 	 (solaire-mode-real-buffer-p)
 	 (string= (buffer-name) "*dashboard*"))))
   :config
+  (dolist (face '(mode-line mode-line-active mode-line-inactive))
+    (setf (alist-get face solaire-mode-remap-alist) nil))
   (solaire-global-mode +1))
 
 (use-package dashboard

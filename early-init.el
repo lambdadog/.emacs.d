@@ -30,8 +30,13 @@
 
   ;; Remove truncation symbol
   (let ((display-table (make-display-table)))
-    (set-display-table-slot display-table 'truncation 32)
+    (set-display-table-slot display-table 'truncation        32)
+    (set-display-table-slot display-table 'wrap              32)
+    (set-display-table-slot display-table 'selective-display 32)
     (setq-default standard-display-table display-table))
+  (fringe-mode '(0 . 0))
+  (setq-default left-margin-width 1)
+  (setq-default truncate-lines t)
 
   (setq inhibit-startup-screen t)
   (setq inhibit-startup-echo-area-message user-login-name)
@@ -39,6 +44,7 @@
   (add-to-list 'load-path (expand-file-name "lib/doom-themes/" user-emacs-directory))
   (add-to-list 'load-path (expand-file-name "lib/doom-themes/themes/" user-emacs-directory))
   (require 'doom-opera-light-theme)
+  (setq doom-opera-light-padded-modeline t)
   (load-theme 'doom-opera-light 'no-confirm)
 
   (set-face-attribute 'default nil :font "Fira Code")
