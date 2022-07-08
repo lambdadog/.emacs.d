@@ -51,7 +51,8 @@
   :custom
   (solaire-mode-real-buffer-fn
    (lambda ()
-     (or (solaire-mode-real-buffer-p)
+     (or (minibufferp)
+	 (solaire-mode-real-buffer-p)
 	 (string= (buffer-name) "*dashboard*"))))
   :config
   (solaire-global-mode +1))

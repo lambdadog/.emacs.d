@@ -41,5 +41,7 @@
   (require 'doom-opera-light-theme)
   (load-theme 'doom-opera-light 'no-confirm)
 
+  (set-face-attribute 'default nil :font "Fira Code")
+
   (when (fboundp 'pixel-scroll-precision-mode)
     (pixel-scroll-precision-mode 1)))
