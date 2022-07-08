@@ -57,7 +57,7 @@
        (display-line-numbers-mode +1)))
   :custom
   (display-line-numbers-type 'relative)
-  (display-line-numbers-width-start 99)
+  (display-line-numbers-width 3)
   (display-line-numbers-current-absolute nil)
   :config
   (set-face-background 'line-number-current-line "#eeeeee")
