@@ -1,0 +1,7 @@
+* Prospective Packages
+Packages I'm considering for inclusion in my config but don't yet have
+a use-case for.
+** [[https://github.com/radian-software/apheleia][Apheleia]]
+Seems like the perfect code formatter integration, but I don't
+currently have anything like that set up in my config.
+
