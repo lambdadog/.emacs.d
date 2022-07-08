@@ -7,4 +7,23 @@ currently have anything like that set up in my config.
 ** [[https://depp.brause.cc/shackle/][Shackle]]
 Seems very useful but also very complex to use effectively. Worth some
 investigation.
+** [[https://gitlab.com/matsievskiysv/multistate][multistate]]
+Modal editing without the presets. Will likely take a lot of work to
+set up but could be quite valuable.
+** [[https://github.com/Malabarba/aggressive-indent-mode][aggressive-indent-mode]]
+Seems neat, but I'd have to try it to see how much I actually like it
+in practice.
+** [[https://github.com/manateelazycat/lsp-bridge][lsp-bridge]]
+A lighter LSP client appeals to me anyway, and I don't particularly
+care about having other non-LSP completion methods supported.
 
+Consider looking at ACM (async completion framework) and making it
+usable for elisp native completion as well though.
+** Flycheck
+Effortful to set up but worth it.
+** Projectile
+** Tree-Sitter
+I would be hacking on this anyway with tree-sitter-query-indent.
+** Lispy
+[[https://github.com/abo-abo/lispy/blob/df1b7e614fb0f73646755343e8892ddda310f427/lispy.el#L9692][parinfer mode]]
+** Treemacs (maybe?)
