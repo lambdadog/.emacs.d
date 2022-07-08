@@ -32,6 +32,9 @@
 [submodule "magit"]
 	path = lib/magit
 	url = git@github.com:magit/magit.git
+[submodule "mood-line"]
+	path = lib/mood-line
+	url = git@gitlab.com:jessieh/mood-line.git
 [submodule "no-littering"]
 	path = lib/no-littering
 	url = git@github.com:emacscollective/no-littering.git
