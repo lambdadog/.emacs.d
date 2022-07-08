@@ -105,3 +105,6 @@
 ;; load the package upon ctrlf-mode being enabled
 (use-package ctrlf)
 (ctrlf-mode +1)
+
+;;; TODO: setup selectrum how I like it
+;; (use-package selectrum)
