@@ -105,5 +105,15 @@
 (use-package ctrlf)
 (ctrlf-mode +1)
 
+(use-package magit
+  ;; I prefer this binding to #'magit
+  :bind ("C-x g" . #'magit-status))
+
+(use-package forge
+  :after magit
+  :custom
+  (forge-topic-list-limit '(60 . -5))
+  (forge-topic-list-order '(number . >)))
+
 ;;; TODO: setup selectrum how I like it
 ;; (use-package selectrum)
