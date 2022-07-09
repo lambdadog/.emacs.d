@@ -74,8 +74,7 @@
   (solaire-mode-real-buffer-fn #'lambdadog:real-buffer-fn)
   :config
   (defun lambdadog:real-buffer-fn ()
-    (or (minibufferp)
-	(solaire-mode-real-buffer-p)
+    (or (solaire-mode-real-buffer-p)
 	(string= (buffer-name) "*dashboard*")))
   ;; TODO: inherit from `solaire-default-face'
   (set-face-foreground 'vertical-border "#eeeeee")
@@ -117,4 +116,23 @@
   (forge-topic-list-order '(number . >)))
 
 ;;; TODO: setup selectrum how I like it
-;; (use-package selectrum)
+(use-package selectrum
+  :after (solaire-mode)
+  :demand t
+  :custom
+  (selectrum-display-action '(display-buffer-in-side-window
+			      (side . bottom)
+			      (slot . -1)))
+  (selectrum-fix-vertical-window-height 8)
+  :hook
+  (selectrum-display-action . lambdadog:selectrum-display-action-hook)
+  (buffer-list-update . lambdadog:selectrum-refocus-minibuffer)
+  :config
+  (defun lambdadog:selectrum-display-action-hook ()
+    (buffer-face-set 'solaire-default-face)
+    (setq-local mode-line-format nil)
+    (setq-local truncate-lines t))
+  (defun lambdadog:selectrum-refocus-minibuffer ()
+    (when (string= (buffer-name) selectrum--display-action-buffer)
+      (select-window (active-minibuffer-window) nil)))
+  (selectrum-mode 1))
