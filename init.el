@@ -48,17 +48,17 @@
 (use-package display-line-numbers
   :demand t
   :hook
-  (prog-mode
-   . (lambda ()
-       (setq-local left-margin-width 0)
-       (setq-local line-prefix " ")
-       (set-window-buffer nil (current-buffer))
-       (display-line-numbers-mode +1)))
+  (prog-mode . lambdadog:display-line-numbers-hook)
   :custom
   (display-line-numbers-type 'relative)
   (display-line-numbers-width 3)
   (display-line-numbers-current-absolute nil)
   :config
+  (defun lambdadog:display-line-numbers-hook ()
+    (setq-local left-margin-width 0)
+    (setq-local line-prefix " ")
+    (set-window-buffer nil (current-buffer))
+    (display-line-numbers-mode +1))
   ;; TODO: inherit from `solaire-default-face'
   (set-face-background 'line-number-current-line "#eeeeee")
   (set-face-background 'line-number "#eeeeee"))
@@ -71,12 +71,12 @@
 (use-package solaire-mode
   :demand t
   :custom
-  (solaire-mode-real-buffer-fn
-   (lambda ()
-     (or (minibufferp)
-	 (solaire-mode-real-buffer-p)
-	 (string= (buffer-name) "*dashboard*"))))
+  (solaire-mode-real-buffer-fn #'lambdadog:real-buffer-fn)
   :config
+  (defun lambdadog:real-buffer-fn ()
+    (or (minibufferp)
+	(solaire-mode-real-buffer-p)
+	(string= (buffer-name) "*dashboard*")))
   ;; TODO: inherit from `solaire-default-face'
   (set-face-foreground 'vertical-border "#eeeeee")
   (set-face-background 'vertical-border "#eeeeee")
@@ -95,9 +95,10 @@
   (dashboard-filter-agenda-entry 'dashboard-filter-agenda-by-todo)
   (dashboard-item-names '(("Agenda for the coming week:" . "Agenda:")))
   (dashboard-items '((recents . 5) (agenda)))
-  (initial-buffer-choice
-   (lambda () (get-buffer-create "*dashboard*")))
+  (initial-buffer-choice #'lambdadog:initial-buffer-choice)
   :config
+  (defun lambdadog:initial-buffer-choice ()
+    (get-buffer-create "*dashboard*"))
   (dashboard-setup-startup-hook))
 
 ;; CTRLF-mode has autoload configured in a way that doesn't actually
