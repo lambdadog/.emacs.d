@@ -22,6 +22,9 @@
 [submodule "doom-themes"]
 	path = lib/doom-themes
 	url = git@github.com:doomemacs/themes.git
+[submodule "emacs"]
+	path = emacs
+	url = git@github.com:lambdadog/emacs.git
 [submodule "emacsql"]
 	path = lib/emacsql
 	url = git@github.com:skeeto/emacsql.git
@@ -29,12 +32,21 @@
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
+[submodule "forge"]
+	path = lib/forge
+	url = git@github.com:magit/forge.git
+[submodule "ghub"]
+	path = lib/ghub
+	url = git@github.com:magit/ghub.git
 [submodule "macrostep"]
 	path = lib/macrostep
 	url = git@github.com:joddie/macrostep.git
 [submodule "magit"]
 	path = lib/magit
 	url = git@github.com:magit/magit.git
+[submodule "markdown-mode"]
+	path = lib/markdown-mode
+	url = git@github.com:jrblevin/markdown-mode.git
 [submodule "mood-line"]
 	path = lib/mood-line
 	url = git@gitlab.com:jessieh/mood-line.git
@@ -56,12 +68,15 @@
 [submodule "transient"]
 	path = lib/transient
 	url = git@github.com:magit/transient.git
+[submodule "treepy"]
+	path = lib/treepy
+	url = git@github.com:volrath/treepy.el.git
 [submodule "use-package"]
 	path = lib/use-package
 	url = git@github.com:jwiegley/use-package.git
 [submodule "with-editor"]
 	path = lib/with-editor
 	url = git@github.com:magit/with-editor.git
-[submodule "emacs"]
-	path = emacs
-	url = git@github.com:lambdadog/emacs.git
+[submodule "yaml"]
+	path = lib/yaml
+	url = git@github.com:zkry/yaml.el.git
