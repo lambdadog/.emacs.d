@@ -154,6 +154,7 @@
   (cl-pushnew 'epkg-marginalia-annotate-package
 	      (alist-get 'package marginalia-annotator-registry)))
 
+;; LSP Bridge is a fantastic package with abysmal configuration-flow.
 (use-package lsp-bridge
   :demand t
   :custom
@@ -201,4 +202,8 @@
       (when (funcall lsp-bridge-get-lang-server-by-project proj-path file-path)
 	t)))
   (advice-add #'lsp-bridge-has-lsp-server-p :override
-	      #'lambdadog:has-lsp-server))
+	      #'lambdadog:has-lsp-server)
+
+  (global-lsp-bridge-mode))
+
+(use-package haskell-mode)
