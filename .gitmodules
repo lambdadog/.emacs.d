@@ -32,6 +32,9 @@
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
+[submodule "epkg-marginalia"]
+	path = lib/epkg-marginalia
+	url = git@github.com:emacscollective/epkg-marginalia.git
 [submodule "forge"]
 	path = lib/forge
 	url = git@github.com:magit/forge.git
@@ -44,6 +47,9 @@
 [submodule "magit"]
 	path = lib/magit
 	url = git@github.com:magit/magit.git
+[submodule "marginalia"]
+	path = lib/marginalia
+	url = git@github.com:minad/marginalia.git
 [submodule "markdown-mode"]
 	path = lib/markdown-mode
 	url = git@github.com:jrblevin/markdown-mode.git
