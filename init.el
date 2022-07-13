@@ -2,6 +2,8 @@
 (when (< emacs-major-version 27)
   (load-file (expand-file-name "early-init.el" user-emacs-directory)))
 
+(require 'cl-lib)
+
 (eval-and-compile ;; borg
   (add-to-list 'load-path (expand-file-name "lib/borg" user-emacs-directory))
   (require 'borg)
@@ -57,7 +59,6 @@
   (defun lambdadog:display-line-numbers-hook ()
     (setq-local left-margin-width 0)
     (setq-local line-prefix " ")
-    (set-window-buffer nil (current-buffer))
     (display-line-numbers-mode +1))
   ;; TODO: inherit from `solaire-default-face'
   (set-face-background 'line-number-current-line "#eeeeee")
@@ -136,3 +137,18 @@
     (when (string= (buffer-name) selectrum--display-action-buffer)
       (select-window (active-minibuffer-window) nil)))
   (selectrum-mode 1))
+
+(use-package marginalia
+  :after (selectrum)
+  :demand t
+  :custom
+  (marginalia-margin-threshold 170)
+  :config
+  (marginalia-mode 1))
+
+(use-package epkg-marginalia
+  :after (marginalia)
+  :demand t
+  :config
+  (cl-pushnew 'epkg-marginalia-annotate-package
+	      (alist-get 'package marginalia-annotator-registry)))
