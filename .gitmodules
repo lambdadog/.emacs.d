@@ -61,9 +61,16 @@
 [submodule "markdown-mode"]
 	path = lib/markdown-mode
 	url = git@github.com:jrblevin/markdown-mode.git
+[submodule "mmm-mode"]
+	path = lib/mmm-mode
+	url = git@github.com:purcell/mmm-mode.git
 [submodule "mood-line"]
 	path = lib/mood-line
 	url = git@gitlab.com:jessieh/mood-line.git
+[submodule "nix-mode"]
+	path = lib/nix-mode
+	url = git@github.com:NixOS/nix-mode.git
+	no-byte-compile = nix-company.el
 [submodule "no-littering"]
 	path = lib/no-littering
 	url = git@github.com:emacscollective/no-littering.git
