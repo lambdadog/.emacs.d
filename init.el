@@ -2,12 +2,13 @@
 (when (< emacs-major-version 27)
   (load-file (expand-file-name "early-init.el" user-emacs-directory)))
 
-(require 'cl-lib)
-
 (eval-and-compile ;; borg
   (add-to-list 'load-path (expand-file-name "lib/borg" user-emacs-directory))
   (require 'borg)
   (borg-initialize))
+
+(require 'cl-lib)
+(require 's)
 
 (eval-and-compile ;; use-package
   (require 'use-package)
@@ -167,9 +168,37 @@
        (unless (= 0 (shell-command nix-build-cmd))
 	 (error "lsp-bridge: failed to get python3 shell")))
      (expand-file-name "bin/python3" root-path)))
+  (lsp-bridge-lang-server-extension-list '())
+  (lsp-bridge-lang-server-mode-list '())
   :config
-  (defun lambdadog:get-lang-server-by-project (proj-path _file-path)
-    (let ((lsp-cfg-path (expand-file-name "lsp.json" proj-path)))
-      (when (file-exists-p lsp-cfg-path)
-	lsp-cfg-path)))
-  (setq lsp-bridge-get-lang-server-by-project #'lambdadog:get-lang-server-by-project))
+  ;; TODO handle loading by extension as well
+  (defun lambdadog:get-lang-server-by-project (proj-path file-path)
+    (let ((project-lsp-cfg-path (expand-file-name "lsp.json" proj-path))
+	  (lang-lsp-path (no-littering-expand-etc-file-name "langserver")))
+      (if (file-exists-p project-lsp-cfg-path)
+	  project-lsp-cfg-path
+	(let* ((mode (symbol-name
+		      (save-excursion
+			(with-current-buffer (find-file-noselect file-path)
+			  major-mode))))
+	       (json-name (s-replace "-mode" ".json" mode))
+	       (mode-cfg-path (expand-file-name json-name lang-lsp-path)))
+	  (when (file-exists-p mode-cfg-path)
+	    mode-cfg-path)))))
+  (setq lsp-bridge-get-lang-server-by-project #'lambdadog:get-lang-server-by-project)
+
+  ;; Actually load based on our lsp server configs
+  (defun lambdadog:has-lsp-server ()
+    (let* ((file-path (ignore-errors (file-truename buffer-file-name)))
+	   (proj-path (if lsp-bridge-get-project-path-by-filepath
+			  (funcall lsp-bridge-get-project-path-by-filepath file-path)
+			(let ((default-directory (file-name-directory file-path)))
+			  (when (string= "true"
+					 (string-trim
+					  (shell-command-to-string "git rev-parse --is-inside-work-tree")))
+			    (string-trim
+			     (shell-command-to-string "git rev-parse --show-toplevel")))))))
+      (when (funcall lsp-bridge-get-lang-server-by-project proj-path file-path)
+	t)))
+  (advice-add #'lsp-bridge-has-lsp-server-p :override
+	      #'lambdadog:has-lsp-server))

@@ -1,0 +1,25 @@
+{
+    "name": "pyright",
+    "languageId": "python",
+    "command": [
+	"pyright-langserver",
+	"--stdio"
+    ],
+    "ignore-diagnostic": "# type: ignore",
+    "settings": {
+	"python.analysis": {
+	    "autoImportCompletions": true,
+	    "typeshedPaths": [],
+	    "stubPath": "",
+	    "useLibraryCodeForTypes": true,
+	    "diagnosticMode": "openFilesOnly",
+	    "typeCheckingMode": "basic",
+	    "logLevel": "verbose",
+	    "autoSearchPaths": true,
+	    "extraPaths": []
+	},
+	"python": {
+	    "venvPath": "/home/lambdadog/.venv"
+	}
+    }
+}
