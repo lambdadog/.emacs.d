@@ -41,6 +41,10 @@
 [submodule "ghub"]
 	path = lib/ghub
 	url = git@github.com:magit/ghub.git
+[submodule "lsp-bridge"]
+	path = lib/lsp-bridge
+	url = git@github.com:manateelazycat/lsp-bridge.git
+	load-path = acm
 [submodule "macrostep"]
 	path = lib/macrostep
 	url = git@github.com:joddie/macrostep.git
@@ -65,6 +69,9 @@
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
+[submodule "posframe"]
+	path = lib/posframe
+	url = git@github.com:tumashu/posframe.git
 [submodule "selectrum"]
 	path = lib/selectrum
 	url = git@github.com:radian-software/selectrum.git
@@ -86,3 +93,6 @@
 [submodule "yaml"]
 	path = lib/yaml
 	url = git@github.com:zkry/yaml.el.git
+[submodule "yasnippet"]
+	path = lib/yasnippet
+	url = git@github.com:joaotavora/yasnippet.git
