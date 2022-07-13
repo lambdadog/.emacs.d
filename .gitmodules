@@ -73,6 +73,9 @@
 [submodule "posframe"]
 	path = lib/posframe
 	url = git@github.com:tumashu/posframe.git
+[submodule "s"]
+	path = lib/s
+	url = git@github.com:magnars/s.el.git
 [submodule "selectrum"]
 	path = lib/selectrum
 	url = git@github.com:radian-software/selectrum.git
