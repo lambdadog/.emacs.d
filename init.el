@@ -152,3 +152,24 @@
   :config
   (cl-pushnew 'epkg-marginalia-annotate-package
 	      (alist-get 'package marginalia-annotator-registry)))
+
+(use-package lsp-bridge
+  :demand t
+  :custom
+  (lsp-bridge-python-command
+   (let* ((default-directory user-emacs-directory)
+	  (root-path (no-littering-expand-var-file-name "nix-gc-roots/lsp-bridge-python3/"))
+	  (quoted-root-path (shell-quote-argument root-path))
+	  (nix-build-cmd
+	   (format "nix-build -E 'with (import ./.).pkgs; python3.withPackages (p: [ p.epc ])' -o %s"
+		   quoted-root-path)))
+     (unless (file-exists-p root-path)
+       (unless (= 0 (shell-command nix-build-cmd))
+	 (error "lsp-bridge: failed to get python3 shell")))
+     (expand-file-name "bin/python3" root-path)))
+  :config
+  (defun lambdadog:get-lang-server-by-project (proj-path _file-path)
+    (let ((lsp-cfg-path (expand-file-name "lsp.json" proj-path)))
+      (when (file-exists-p lsp-cfg-path)
+	lsp-cfg-path)))
+  (setq lsp-bridge-get-lang-server-by-project #'lambdadog:get-lang-server-by-project))

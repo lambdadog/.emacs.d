@@ -44,6 +44,7 @@
 [submodule "lsp-bridge"]
 	path = lib/lsp-bridge
 	url = git@github.com:manateelazycat/lsp-bridge.git
+	load-path = .
 	load-path = acm
 [submodule "macrostep"]
 	path = lib/macrostep

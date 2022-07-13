@@ -2,6 +2,7 @@ let
   sources = import ./nix/sources.nix;
   pkgs = import sources.nixpkgs {};
 in {
+  inherit pkgs;
   emacs = pkgs.emacs.overrideAttrs (old: {
     # TODO: figure out how to get version
     name = "emacs-lambdadog";
