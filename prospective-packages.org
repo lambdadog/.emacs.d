@@ -27,3 +27,12 @@ I would be hacking on this anyway with tree-sitter-query-indent.
 ** Lispy
 [[https://github.com/abo-abo/lispy/blob/df1b7e614fb0f73646755343e8892ddda310f427/lispy.el#L9692][parinfer mode]]
 ** Treemacs (maybe?)
+* More stuff
+** StumpWM
+Control from emacs with a parallel to [[https://github.com/ag91/emacs-with-nyxt][ag91/emacs-with-nyxt]]
+(essentially, controlling with sly/slynk)
+https://github.com/juki-pub/stumpbuffer
+** Manage firefox windows like buffers?
+This is for exwm, but might work for stumpwm in an interesting way?
+I'd probably have to hook new buffer stuff.
+https://gitlab.com/nbarrientos/dotfiles/-/blob/master/.mozilla/user.js
