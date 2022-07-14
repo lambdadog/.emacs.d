@@ -1,5 +1,9 @@
 ;;; -*- lexical-binding: t -*-
-(when (< emacs-major-version 27)
+;; loading early-init.el changes some properties of my load process,
+;; so make sure esup loads it if we're profiling startup
+(when (or (and (boundp 'esup-child-parent-log-process)
+	       esup-child-parent-log-process)
+	  (< emacs-major-version 27))
   (load-file (expand-file-name "early-init.el" user-emacs-directory)))
 
 (eval-and-compile ;; borg
@@ -19,6 +23,20 @@
   :demand t
   :custom
   (auto-save-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
+
+(use-package minibuffer
+  :no-require t
+  :hook
+  (minibuffer-setup-hook . lambdadog:defer-gc)
+  (minibuffer-exit-hook . lambdadog:restore-gc)
+  :config
+  (defun lambdadog:defer-gc ()
+    (setq gc-cons-threshold most-positive-fixnum))
+  (defun lambdadog:restore-gc ()
+    (run-at-time
+     1 nil
+     (defun lambdadog:-do-restore-gc ()
+       (setq gc-cons-threshold 16777216)))))
 
 (use-package custom
   :after (no-littering)
@@ -64,6 +82,11 @@
   ;; TODO: inherit from `solaire-default-face'
   (set-face-background 'line-number-current-line "#eeeeee")
   (set-face-background 'line-number "#eeeeee"))
+
+(use-package esup
+  :custom
+  ;; fixes error
+  (esup-depth 0))
 
 (use-package mood-line
   :demand t
@@ -149,25 +172,23 @@
 
 (use-package epkg-marginalia
   :after (marginalia)
-  :demand t
-  :config
-  (cl-pushnew 'epkg-marginalia-annotate-package
-	      (alist-get 'package marginalia-annotator-registry)))
+  :commands (epkg-marginalia-annotate-package))
+(cl-pushnew 'epkg-marginalia-annotate-package
+	    (alist-get 'package marginalia-annotator-registry))
 
 ;; LSP Bridge is a fantastic package with abysmal configuration-flow.
 (use-package lsp-bridge
-  :demand t
+  :commands (lsp-bridge-mode)
   :custom
   (lsp-bridge-python-command
-   (let* ((default-directory user-emacs-directory)
-	  (root-path (no-littering-expand-var-file-name "nix-gc-roots/lsp-bridge-python3/"))
-	  (quoted-root-path (shell-quote-argument root-path))
-	  (nix-build-cmd
-	   (format "nix-build -E 'with (import ./.).pkgs; python3.withPackages (p: [ p.epc ])' -o %s"
-		   quoted-root-path)))
+   (let ((root-path (no-littering-expand-var-file-name "nix-gc-roots/lsp-bridge-python3/")))
      (unless (file-exists-p root-path)
-       (unless (= 0 (shell-command nix-build-cmd))
-	 (error "lsp-bridge: failed to get python3 shell")))
+       (let* ((default-directory user-emacs-directory)
+	      (nix-build-cmd
+	       (format "nix-build -E 'with (import ./.).pkgs; python3.withPackages (p: [ p.epc ])' -o %s"
+		       (shell-quote-argument root-path))))
+	 (unless (= 0 (shell-command nix-build-cmd))
+	   (error "lsp-bridge: failed to get python3 shell"))))
      (expand-file-name "bin/python3" root-path)))
   (lsp-bridge-lang-server-extension-list '())
   (lsp-bridge-lang-server-mode-list '())
@@ -188,22 +209,32 @@
 	    mode-cfg-path)))))
   (setq lsp-bridge-get-lang-server-by-project #'lambdadog:get-lang-server-by-project)
 
-  ;; Actually load based on our lsp server configs
+  ;; Won't actually load without this.
   (defun lambdadog:has-lsp-server ()
-    (let* ((file-path (ignore-errors (file-truename buffer-file-name)))
-	   (proj-path (if lsp-bridge-get-project-path-by-filepath
-			  (funcall lsp-bridge-get-project-path-by-filepath file-path)
-			(let ((default-directory (file-name-directory file-path)))
-			  (when (string= "true"
-					 (string-trim
-					  (shell-command-to-string "git rev-parse --is-inside-work-tree")))
-			    (string-trim
-			     (shell-command-to-string "git rev-parse --show-toplevel")))))))
-      (when (funcall lsp-bridge-get-lang-server-by-project proj-path file-path)
-	t)))
+    (when buffer-file-name
+      (let* ((file-path (ignore-errors (file-truename buffer-file-name)))
+	     (proj-path (if lsp-bridge-get-project-path-by-filepath
+			    (funcall lsp-bridge-get-project-path-by-filepath file-path)
+			  (let ((default-directory (file-name-directory file-path)))
+			    (when (string= "true"
+					   (string-trim
+					    (shell-command-to-string "git rev-parse --is-inside-work-tree")))
+			      (string-trim
+			       (shell-command-to-string "git rev-parse --show-toplevel")))))))
+	(when (funcall lsp-bridge-get-lang-server-by-project proj-path file-path)
+	  t))))
   (advice-add #'lsp-bridge-has-lsp-server-p :override
-	      #'lambdadog:has-lsp-server)
+	      #'lambdadog:has-lsp-server))
 
-  (global-lsp-bridge-mode))
+;; Setup hooks
+(dolist (lsp-cfg (file-expand-wildcards (no-littering-expand-etc-file-name "langserver/*.json")))
+  (let* ((mode-name (format "%s-mode" (file-name-base lsp-cfg)))
+	 (mode-file (symbol-file (intern mode-name)))
+	 (hook (intern (format "%s-hook" mode-name))))
+    (message "hook %s after %s loads" (symbol-name hook) (file-name-base mode-file))
+    (with-eval-after-load mode-file
+      (add-hook hook #'lsp-bridge-mode))))
+
+  ;; (global-lsp-bridge-mode))
 
 (use-package haskell-mode)

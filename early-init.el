@@ -2,6 +2,16 @@
 (setq user-init-file (or load-file-name buffer-file-name))
 (setq user-emacs-directory (file-name-directory user-init-file))
 
+(setq gc-cons-threshold most-positive-fixnum ; 2^61 bytes
+      gc-cons-percentage 0.6)
+(defvar lambdadog:file-name-handler-alist-cache file-name-handler-alist)
+(setq file-name-handler-alist nil)
+(defun lambdadog:restore-post-init-settings ()
+  (setq gc-cons-threshold 16777216 ; 16mb
+        gc-cons-percentage 0.1)
+  (setq file-name-handler-alist lambdadog:file-name-handler-alist-cache))
+(add-hook 'emacs-startup-hook #'lambdadog:restore-post-init-settings)
+
 (progn ;; auto-compile
   (setq load-prefer-newer t)
   (add-to-list 'load-path (expand-file-name "lib/compat/"       user-emacs-directory))
