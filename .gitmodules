@@ -35,6 +35,9 @@
 [submodule "epkg-marginalia"]
 	path = lib/epkg-marginalia
 	url = git@github.com:emacscollective/epkg-marginalia.git
+[submodule "esup"]
+	path = lib/esup
+	url = git@github.com:jschaf/esup.git
 [submodule "forge"]
 	path = lib/forge
 	url = git@github.com:magit/forge.git
