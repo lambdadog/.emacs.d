@@ -238,3 +238,4 @@
   ;; (global-lsp-bridge-mode))
 
 (use-package haskell-mode)
+(use-package rust-mode)

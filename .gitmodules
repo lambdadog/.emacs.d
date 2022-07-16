@@ -86,6 +86,9 @@
 [submodule "posframe"]
 	path = lib/posframe
 	url = git@github.com:tumashu/posframe.git
+[submodule "rust-mode"]
+	path = lib/rust-mode
+	url = git@github.com:rust-lang/rust-mode.git
 [submodule "s"]
 	path = lib/s
 	url = git@github.com:magnars/s.el.git
