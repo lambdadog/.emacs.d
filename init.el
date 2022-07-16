@@ -74,10 +74,11 @@
   (display-line-numbers-type 'relative)
   (display-line-numbers-width 3)
   (display-line-numbers-current-absolute nil)
+  ;; https://github.com/lambdadog/emacs-patches/blob/master/patches/display-line-numbers-pad.patch
+  (display-line-numbers-pad t)
   :config
   (defun lambdadog:display-line-numbers-hook ()
     (setq-local left-margin-width 0)
-    (setq-local line-prefix " ")
     (display-line-numbers-mode +1))
   ;; TODO: inherit from `solaire-default-face'
   (set-face-background 'line-number-current-line "#eeeeee")
@@ -192,6 +193,7 @@
      (expand-file-name "bin/python3" root-path)))
   (lsp-bridge-lang-server-extension-list '())
   (lsp-bridge-lang-server-mode-list '())
+  (lsp-bridge-get-lang-server-by-project #'lambdadog:get-lang-server-by-project)
   :config
   ;; TODO handle loading by extension as well
   (defun lambdadog:get-lang-server-by-project (proj-path file-path)
@@ -207,9 +209,8 @@
 	       (mode-cfg-path (expand-file-name json-name lang-lsp-path)))
 	  (when (file-exists-p mode-cfg-path)
 	    mode-cfg-path)))))
-  (setq lsp-bridge-get-lang-server-by-project #'lambdadog:get-lang-server-by-project)
 
-  ;; Won't actually load without this.
+  ;; lsp-bridge-mode won't actually start the LSP server without this
   (defun lambdadog:has-lsp-server ()
     (when buffer-file-name
       (let* ((file-path (ignore-errors (file-truename buffer-file-name)))
@@ -221,8 +222,9 @@
 					    (shell-command-to-string "git rev-parse --is-inside-work-tree")))
 			      (string-trim
 			       (shell-command-to-string "git rev-parse --show-toplevel")))))))
-	(when (funcall lsp-bridge-get-lang-server-by-project proj-path file-path)
-	  t))))
+	(unless (file-exists-p (expand-file-name ".nolsp" proj-path))
+	  (when (funcall lsp-bridge-get-lang-server-by-project proj-path file-path)
+	    t)))))
   (advice-add #'lsp-bridge-has-lsp-server-p :override
 	      #'lambdadog:has-lsp-server))
 

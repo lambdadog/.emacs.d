@@ -45,7 +45,8 @@
     (set-display-table-slot display-table 'selective-display 32)
     (setq-default standard-display-table display-table))
   (fringe-mode '(0 . 0))
-  (setq-default left-margin-width 1)
+  (setq-default left-margin-width 1
+		right-margin-width 1)
   (setq-default truncate-lines t)
 
   (setq inhibit-startup-screen t)
