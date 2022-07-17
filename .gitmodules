@@ -119,3 +119,6 @@
 [submodule "yasnippet"]
 	path = lib/yasnippet
 	url = git@github.com:joaotavora/yasnippet.git
+[submodule "zig-mode"]
+	path = lib/zig-mode
+	url = git@github.com:ziglang/zig-mode.git
