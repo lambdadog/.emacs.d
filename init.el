@@ -133,7 +133,13 @@
 
 (use-package magit
   ;; I prefer this binding to #'magit
-  :bind ("C-x g" . #'magit-status))
+  :bind
+  ("C-x g" . #'magit-status)
+  ("C-x G" . #'lambdadog:magit-status-for-emacsd)
+  :config
+  (defun lambdadog:magit-status-for-emacsd ()
+    (interactive)
+    (call-interactively #'magit-status user-emacs-directory)))
 
 (use-package forge
   :after magit
