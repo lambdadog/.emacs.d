@@ -132,14 +132,13 @@
 (ctrlf-mode +1)
 
 (use-package magit
-  ;; I prefer this binding to #'magit
+  :commands (magit-status-setup-buffer)
   :bind
   ("C-x g" . #'magit-status)
-  ("C-x G" . #'lambdadog:magit-status-for-emacsd)
-  :config
-  (defun lambdadog:magit-status-for-emacsd ()
-    (interactive)
-    (call-interactively #'magit-status user-emacs-directory)))
+  ("C-x G" . #'lambdadog:magit-status-for-emacsd))
+(defun lambdadog:magit-status-for-emacsd ()
+  (interactive)
+  (magit-status-setup-buffer user-emacs-directory))
 
 (use-package forge
   :after magit
