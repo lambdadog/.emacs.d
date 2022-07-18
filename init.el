@@ -27,8 +27,8 @@
 (use-package minibuffer
   :no-require t
   :hook
-  (minibuffer-setup-hook . lambdadog:defer-gc)
-  (minibuffer-exit-hook . lambdadog:restore-gc)
+  (minibuffer-setup . lambdadog:defer-gc)
+  (minibuffer-exit . lambdadog:restore-gc)
   :config
   (defun lambdadog:defer-gc ()
     (setq gc-cons-threshold most-positive-fixnum))
