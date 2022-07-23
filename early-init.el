@@ -58,4 +58,6 @@
   (setq doom-opera-light-padded-modeline t)
   (load-theme 'doom-opera-light 'no-confirm)
 
-  (set-face-attribute 'default nil :font "Fira Code"))
+  (add-hook 'window-setup-hook
+	    (lambda ()
+	      (set-face-attribute 'default nil :font "Fira Code"))))
