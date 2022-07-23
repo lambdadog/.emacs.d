@@ -47,6 +47,9 @@
 [submodule "haskell-mode"]
 	path = lib/haskell-mode
 	url = git@github.com:haskell/haskell-mode.git
+[submodule "ligature"]
+	path = lib/ligature
+	url = git@github.com:mickeynp/ligature.el.git
 [submodule "lsp-bridge"]
 	path = lib/lsp-bridge
 	url = git@github.com:manateelazycat/lsp-bridge.git
