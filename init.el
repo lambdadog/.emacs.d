@@ -160,6 +160,9 @@
   (buffer-list-update . lambdadog:selectrum-refocus-minibuffer)
   :config
   (defun lambdadog:selectrum-display-action-hook ()
+    ;; (with-current-buffer (get-buffer-create " *selectrum-preview*")
+    ;;   (setq-local mode-line-format nil)
+    ;;   (setq-local cursor-type nil))
     (buffer-face-set 'solaire-default-face)
     (setq-local mode-line-format nil)
     (setq-local truncate-lines t))
@@ -167,6 +170,15 @@
     (when (string= (buffer-name) selectrum--display-action-buffer)
       (select-window (active-minibuffer-window) nil)))
   (selectrum-mode 1))
+
+;; (defun lambdadog:display-preview-window (&rest _)
+;;   (when minibuffer-completing-file-name
+;;     (display-buffer-in-side-window
+;;      (get-buffer " *selectrum-preview*")
+;;      '((side . bottom) (slot . +1)))
+;;     (minimize-window (get-buffer-window " *selectrum-preview*"))))
+;; (advice-add #'selectrum--get-display-window :after
+;; 	    #'lambdadog:display-preview-window)
 
 (use-package marginalia
   :after (selectrum)
