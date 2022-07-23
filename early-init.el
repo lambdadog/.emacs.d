@@ -58,6 +58,11 @@
   (setq doom-opera-light-padded-modeline t)
   (load-theme 'doom-opera-light 'no-confirm)
 
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
   (add-hook 'window-setup-hook
 	    (lambda ()
-	      (set-face-attribute 'default nil :font "Fira Code"))))
+	      (condition-case nil
+		  (progn
+		    (set-face-attribute 'default nil :font "Fira Code")
+		    (setq-default line-spacing 1))
+		(error nil)))))
