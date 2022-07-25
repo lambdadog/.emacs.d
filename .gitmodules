@@ -83,6 +83,9 @@
 [submodule "org"]
 	path = lib/org
 	url = git@github.com:emacsmirror/org.git
+[submodule "ox-bb"]
+	path = lib/ox-bb
+	url = git@github.com:mmitch/ox-bb.git
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
