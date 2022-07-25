@@ -46,7 +46,7 @@
     (setq-default standard-display-table display-table))
   (fringe-mode '(0 . 0))
   (setq-default left-margin-width 1
-		right-margin-width 1)
+		right-margin-width 0)
   (setq-default truncate-lines t)
 
   (setq inhibit-startup-screen t)
@@ -63,6 +63,7 @@
 	    (lambda ()
 	      (condition-case nil
 		  (progn
-		    (set-face-attribute 'default nil :font "Fira Code")
+		    ;; My eyes aren't particularly what they used to be :P
+		    (set-face-attribute 'default nil :font "Fira Code" :height 105)
 		    (setq-default line-spacing 1))
 		(error nil)))))

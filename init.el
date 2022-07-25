@@ -210,6 +210,81 @@
 (cl-pushnew 'epkg-marginalia-annotate-package
 	    (alist-get 'package marginalia-annotator-registry))
 
+(use-package org
+  :bind
+  ("C-c s" . org-store-link)
+  :hook
+  (org-tab-after-check-for-cycling . lambdadog:org:insert-header-if-line-empty)
+  (org-export-before-processing . lambdadog:org:unfill-before-export)
+  (org-mode . org-indent-mode)
+  (org-mode . auto-fill-mode)
+  :custom
+  (org-default-notes-file
+   (let ((notes-file (no-littering-expand-var-file-name "notes.org")))
+     (unless (file-exists-p notes-file)
+       (with-temp-buffer (write-file notes-file)))
+     notes-file))
+  (org-startup-with-inline-images t)
+  (org-image-actual-width 500)
+  :config
+  (defun lambdadog:org:insert-header-if-line-empty ()
+    (when (or (bolp) (org-match-line "[:blank:]+"))
+      (org-insert-heading)
+      t))
+  (defun lambdadog:org:unfill-before-export (&rest _)
+    (let ((fill-column (point-max)))
+      (fill-region (point) (point-max))))
+
+  (advice-add #'org-delete-backward-char :before-until
+	      (defun lambdadog:org:remove-empty-heading (N)
+		(when (and (= N 1)
+			   (org-point-at-end-of-empty-headline))
+		  (delete-region (line-beginning-position) (line-end-position))
+		  t))))
+
+(use-package org-agenda
+  :after (org)
+  :bind
+  ("C-c a" . org-agenda)
+  :custom
+  (org-agenda-files (list org-default-notes-file)))
+
+(use-package org-capture
+  :after (org)
+  :bind
+  ("C-c c" . org-capture)
+  ("C-c a" . org-agenda)
+  :custom
+  (org-capture-bookmark nil)
+  (org-capture-templates
+   (("t" "Task" entry (file+headline org-default-notes-file "Tasks")
+      "* TODO \n%u\n%a\n%?\n")
+     ("n" "Note" entry (file+headline org-default-notes-file "Notes")
+      "* \n%u\n%a\n%?\n")
+     ("N" "Note (Quote)" entry (file+headline org-default-notes-file "Notes")
+      "* %?\n%u\n%a\n#+BEGIN_QUOTE\n%i\n#+END_QUOTE\n")
+     ("s" "Structure Note" entry (file+headline org-default-notes-file "Structure")
+      "* %?\n%u\n - %a\n"))))
+
+(use-package org-src
+  :after (org)
+  :custom
+  (org-edit-src-persistent-message nil)
+  :hook
+  (org-src-mode
+   . (lambda ()
+       (message
+	(substitute-command-keys
+	 (if org-src--allow-write-back
+	     "Edit, then exit with `\\[org-edit-src-exit]' or abort with \
+`\\[org-edit-src-abort]'"
+	   "Exit with `\\[org-edit-src-exit]' or abort with \
+`\\[org-edit-src-abort]'")))))
+  :bind
+  (:map org-src-mode-map
+	("C-c '" . nil)
+	("C-c C-c" . org-edit-src-exit)))
+
 ;; LSP Bridge is a fantastic package with abysmal configuration-flow.
 (use-package lsp-bridge
   :commands (lsp-bridge-mode)
