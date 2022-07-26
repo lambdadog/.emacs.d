@@ -83,6 +83,9 @@
 [submodule "org"]
 	path = lib/org
 	url = git@github.com:emacsmirror/org.git
+[submodule "org-sticky-header"]
+	path = lib/org-sticky-header
+	url = git@github.com:alphapapa/org-sticky-header.git
 [submodule "ox-sb"]
 	path = lib/ox-sb
 	url = git@github.com:lambdadog/ox-sb.git

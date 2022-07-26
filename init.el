@@ -116,7 +116,7 @@
    'prog-mode '("www" "**" "***" "**/" "*>" "*/" "\\\\" "\\\\\\" "{-" "::"
                 ":::" ":=" "!!" "!=" "!==" "-}" "----" "-->" "->" "->>"
                 "-<" "-<<" "-~" "#{" "#[" "##" "###" "####" "#(" "#?" "#_"
-                "#_(" ".-" ".=" ".." "..<" "..." "?=" "??" ";;" "/*" "/**"
+                "#_(" ".-" ".=" ".." "..<" "..." "?=" "??" ";;" ";;;" "/*" "/**"
                 "/=" "/==" "/>" "//" "///" "&&" "||" "||=" "|=" "|>" "^=" "$>"
                 "++" "+++" "+>" "=:=" "==" "===" "==>" "=>" "=>>" "<="
                 "=<<" "=/=" ">-" ">=" ">=>" ">>" ">>-" ">>=" ">>>" "<*"
@@ -233,7 +233,14 @@
       t))
   (defun lambdadog:org:unfill-before-export (&rest _)
     (let ((fill-column (point-max)))
-      (fill-region (point) (point-max))))
+      (save-excursion
+	(goto-char (point-max))
+	(while (> (point) (point-min))
+	  (let ((el-type (org-element-type (org-element-at-point (point)))))
+	    (unless (or (eq el-type 'src-block)
+			(eq el-type 'example-block))
+	      (org-fill-element nil)))
+	  (org-backward-paragraph)))))
 
   (advice-add #'org-delete-backward-char :before-until
 	      (defun lambdadog:org:remove-empty-heading (N)
@@ -241,6 +248,41 @@
 			   (org-point-at-end-of-empty-headline))
 		  (delete-region (line-beginning-position) (line-end-position))
 		  t))))
+
+(use-package ox
+  :config
+  (require 'ox-sb))
+
+(use-package org-sticky-header
+  :after (org)
+  :hook
+  (org-mode . org-sticky-header-mode)
+  (org-sticky-header-mode . lambdadog:org:init-sticky-header)
+  :custom
+  (org-sticky-header-full-path 'full)
+  (org-sticky-header-prefix "❯ ")
+  ;; :config
+  ;; (defvar-local lambdadog:org:sticky-header-title nil)
+  ;; (defun lambdadog:org:init-sticky-header ()
+  ;;   (add-hook 'after-change-function
+  ;; 	      #'lambdadog:org:update-sticky-header-prefix
+  ;; 	      nil 'local)
+  ;;   (lambdadog:org:update-sticky-header-prefix))
+  ;; (defun lambdadog:org:update-sticky-header-prefix (&rest _)
+  ;;   (let ((title (cadar (org-collect-keywords '("TITLE")))))
+  ;;     (when title
+  ;; 	(setq-local lambdadog:org:sticky-header-title
+  ;; 		    (propertize title 'face 'org-document-title))
+  ;; 	(setq-local org-sticky-header-prefix
+  ;; 		    (format "%s %s"
+  ;; 			    lambdadog:org:sticky-header-title
+  ;; 			    (default-value 'org-sticky-header-prefix))))))
+  ;; (advice-add #'org-sticky-header--fetch-stickyline :before-while
+  ;; 	      (defun lambdadog:org:sticky-header-before-first-heading ()
+  ;; 		(when (and (org-before-first-heading-p)
+  ;; 			   lambdadog:org:sticky-header-title)
+  ;; 		  lambdadog:org:sticky-header-title)))
+  )
 
 (use-package org-agenda
   :after (org)
