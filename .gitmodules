@@ -41,6 +41,12 @@
 [submodule "forge"]
 	path = lib/forge
 	url = git@github.com:magit/forge.git
+[submodule "geiser"]
+	path = lib/geiser
+	url = git@gitlab.com:emacs-geiser/geiser.git
+[submodule "geiser-chez"]
+	path = lib/geiser-chez
+	url = git@gitlab.com:emacs-geiser/chez.git
 [submodule "ghub"]
 	path = lib/ghub
 	url = git@github.com:magit/ghub.git
