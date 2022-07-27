@@ -122,6 +122,9 @@
 [submodule "use-package"]
 	path = lib/use-package
 	url = git@github.com:jwiegley/use-package.git
+[submodule "wc-mode"]
+	path = lib/wc-mode
+	url = git@github.com:bnbeckwith/wc-mode.git
 [submodule "with-editor"]
 	path = lib/with-editor
 	url = git@github.com:magit/with-editor.git
