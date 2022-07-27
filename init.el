@@ -327,7 +327,7 @@
 	("C-c '" . nil)
 	("C-c C-c" . org-edit-src-exit)))
 
-;; LSP Bridge is a fantastic package with abysmal configuration-flow.
+;; LSP Bridge is a fantastic package that's abysmally opinionated
 (use-package lsp-bridge
   :commands (lsp-bridge-mode)
   :custom
@@ -345,6 +345,9 @@
   (lsp-bridge-lang-server-mode-list '())
   (lsp-bridge-get-lang-server-by-project #'lambdadog:get-lang-server-by-project)
   :config
+  ;; Avoid "function might not be defined" warning at compile-time
+  (require 'lsp-bridge)
+
   ;; TODO handle loading by extension as well
   (defun lambdadog:get-lang-server-by-project (proj-path file-path)
     (let ((project-lsp-cfg-path (expand-file-name "lsp.json" proj-path))
