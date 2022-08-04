@@ -81,8 +81,9 @@
     (setq-local left-margin-width 0)
     (display-line-numbers-mode +1))
   ;; TODO: inherit from `solaire-default-face'
-  (set-face-background 'line-number-current-line "#eeeeee")
-  (set-face-background 'line-number "#eeeeee"))
+  (let ((color (face-attribute 'solaire-default-face :background)))
+    (dolist (face '(line-number line-number-current-line))
+      (set-face-attribute face nil :background color))))
 
 (use-package esup
   :custom
@@ -103,8 +104,10 @@
     (or (solaire-mode-real-buffer-p)
 	(string= (buffer-name) "*dashboard*")))
   ;; TODO: inherit from `solaire-default-face'
-  (set-face-foreground 'vertical-border "#eeeeee")
-  (set-face-background 'vertical-border "#eeeeee")
+  (let ((color (face-attribute 'solaire-default-face :background)))
+    (set-face-attribute 'vertical-border nil
+			:foreground color
+			:background color))
   (dolist (face '(mode-line mode-line-active mode-line-inactive))
     (setf (alist-get face solaire-mode-remap-alist) nil))
   (solaire-global-mode +1))

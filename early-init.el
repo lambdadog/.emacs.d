@@ -32,38 +32,40 @@
               #'package--save-selected-packages/:override))
 
 (progn ;; early customizations to avoid the emacs flash
-  (when (fboundp 'scroll-bar-mode)
-    (scroll-bar-mode 0))
-  (when (fboundp 'tool-bar-mode)
-    (tool-bar-mode 0))
-  (menu-bar-mode 0)
+  (push '(menu-bar-lines . 0)   default-frame-alist)
+  (push '(tool-bar-lines . 0)   default-frame-alist)
+  (push '(vertical-scroll-bars) default-frame-alist)
+  (setq menu-bar-mode   nil
+	tool-bar-mode   nil
+	scroll-bar-mode nil)
 
-  ;; Remove truncation symbol
-  (let ((display-table (make-display-table)))
-    (set-display-table-slot display-table 'truncation        32)
-    (set-display-table-slot display-table 'wrap              32)
-    (set-display-table-slot display-table 'selective-display 32)
-    (setq-default standard-display-table display-table))
-  (fringe-mode '(0 . 0))
+  (push '(left-fringe . 0)  default-frame-alist)
+  (push '(right-fringe . 0) default-frame-alist)
   (setq-default left-margin-width 1
 		right-margin-width 0)
   (setq-default truncate-lines t)
+
+  ;; Not necessary due to patching emacs -- 0 fringe just simply
+  ;; doesn't display them, but kept in case I need to use unpatched
+  ;; emacs.
+  ;;
+  ;; TODO: Just add a feature to detect somehow
+  ;; (let ((display-table (make-display-table)))
+  ;;   (set-display-table-slot display-table 'truncation 32)
+  ;;   (set-display-table-slot display-table 'wrap 32)
+  ;;   (set-display-table-slot display-table 'selective-display 32)
+  ;;   (setq-default standard-display-table display-table))
 
   (setq inhibit-startup-screen t)
   (setq inhibit-startup-echo-area-message user-login-name)
 
   (add-to-list 'load-path (expand-file-name "lib/doom-themes/" user-emacs-directory))
   (add-to-list 'load-path (expand-file-name "lib/doom-themes/themes/" user-emacs-directory))
-  (require 'doom-opera-light-theme)
-  (setq doom-opera-light-padded-modeline t)
-  (load-theme 'doom-opera-light 'no-confirm)
+  (require 'doom-palenight-theme)
+  (setq doom-palenight-padded-modeline t)
+  (load-theme 'doom-palenight 'no-confirm)
 
-  (add-to-list 'default-frame-alist '(fullscreen . maximized))
-  (add-hook 'window-setup-hook
-	    (lambda ()
-	      (condition-case nil
-		  (progn
-		    ;; My eyes aren't particularly what they used to be :P
-		    (set-face-attribute 'default nil :font "Fira Code" :height 105)
-		    (setq-default line-spacing 1))
-		(error nil)))))
+  (push '(fullscreen . maximized) default-frame-alist)
+
+  (setq-default line-spacing 1)
+  (push '(font . "Fira Code") default-frame-alist))
