@@ -19,6 +19,9 @@
 [submodule "dashboard"]
 	path = lib/dashboard
 	url = git@github.com:emacs-dashboard/emacs-dashboard.git
+[submodule "deadgrep"]
+	path = lib/deadgrep
+	url = git@github.com:Wilfred/deadgrep.git
 [submodule "doom-themes"]
 	path = lib/doom-themes
 	url = git@github.com:doomemacs/themes.git
@@ -119,6 +122,9 @@
 [submodule "solaire-mode"]
 	path = lib/solaire-mode
 	url = git@github.com:hlissner/emacs-solaire-mode.git
+[submodule "spinner"]
+	path = lib/spinner
+	url = git@github.com:Malabarba/spinner.el.git
 [submodule "transient"]
 	path = lib/transient
 	url = git@github.com:magit/transient.git
