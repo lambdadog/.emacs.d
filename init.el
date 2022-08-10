@@ -6,6 +6,8 @@
 	  (< emacs-major-version 27))
   (load-file (expand-file-name "early-init.el" user-emacs-directory)))
 
+(setq warning-suppress-types '((comp)))
+
 (eval-and-compile ;; borg
   (add-to-list 'load-path (expand-file-name "lib/borg" user-emacs-directory))
   (require 'borg)
@@ -132,17 +134,23 @@
   :after (solaire-mode)
   :demand t
   :custom
-  (dashboard-set-init-info nil)
+  (dashboard-set-init-info t)
   (dashboard-set-footer nil)
   (dashboard-page-separator "\n\n")
   (dashboard-center-content t)
-  (dashboard-filter-agenda-entry 'dashboard-filter-agenda-by-todo)
-  (dashboard-item-names '(("Agenda for the coming week:" . "Agenda:")))
-  (dashboard-items '((recents . 5) (agenda)))
-  (initial-buffer-choice #'lambdadog:initial-buffer-choice)
+  (dashboard-items nil)
+  ;; org-agenda is just too huge to load at startup :(
+  ;;
+  ;; it'd be nice if I could get incremental loading for it like doom
+  ;; does, but that doesn't really help with dashboard...
+  ;;
+  ;; (dashboard-filter-agenda-entry 'dashboard-filter-agenda-by-todo)
+  ;; (dashboard-item-names '(("Agenda for the coming week:" . "Agenda:")))
+  ;; (dashboard-items '((recents . 5) (agenda)))
+  ;; (initial-buffer-choice #'lambdadog:initial-buffer-choice)
   :config
-  (defun lambdadog:initial-buffer-choice ()
-    (get-buffer-create "*dashboard*"))
+  ;; (defun lambdadog:initial-buffer-choice ()
+  ;;   (get-buffer-create "*dashboard*"))
   (dashboard-setup-startup-hook))
 
 ;; CTRLF-mode has autoload configured in a way that doesn't actually

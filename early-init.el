@@ -45,16 +45,11 @@
 		right-margin-width 0)
   (setq-default truncate-lines t)
 
-  ;; Not necessary due to patching emacs -- 0 fringe just simply
-  ;; doesn't display them, but kept in case I need to use unpatched
-  ;; emacs.
-  ;;
-  ;; TODO: Just add a feature to detect somehow
-  ;; (let ((display-table (make-display-table)))
-  ;;   (set-display-table-slot display-table 'truncation 32)
-  ;;   (set-display-table-slot display-table 'wrap 32)
-  ;;   (set-display-table-slot display-table 'selective-display 32)
-  ;;   (setq-default standard-display-table display-table))
+  (let ((display-table (make-display-table)))
+    (set-display-table-slot display-table 'truncation 32)
+    (set-display-table-slot display-table 'wrap 32)
+    (set-display-table-slot display-table 'selective-display 32)
+    (setq-default standard-display-table display-table))
 
   (setq inhibit-startup-screen t)
   (setq inhibit-startup-echo-area-message user-login-name)

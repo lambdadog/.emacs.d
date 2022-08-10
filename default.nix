@@ -9,9 +9,6 @@ in {
     srcRepo = true;
     src = ./emacs;
 
-    dontStrip = true;
-    enableDebugging = true;
-
     postPatch = old.postPatch + ''
       substituteInPlace lisp/loadup.el \
         --replace '(emacs-repository-get-version)' '"29-lambdadog"' \
