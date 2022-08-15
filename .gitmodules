@@ -25,9 +25,6 @@
 [submodule "doom-themes"]
 	path = lib/doom-themes
 	url = git@github.com:doomemacs/themes.git
-[submodule "emacs"]
-	path = emacs
-	url = git@github.com:lambdadog/emacs.git
 [submodule "emacsql"]
 	path = lib/emacsql
 	url = git@github.com:skeeto/emacsql.git
