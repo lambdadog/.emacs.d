@@ -1,0 +1,32 @@
+From 5d6d87f3190e9af8aeb96843792153d14a72f480 Mon Sep 17 00:00:00 2001
+From: Ashlynn Anderson <pea@pea.sh>
+Date: Fri, 8 Jul 2022 19:12:24 -0400
+Subject: [PATCH 1/2] Naive implementation
+
+---
+ src/xdisp.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/src/xdisp.c b/src/xdisp.c
+index 4089525e10..7f54074b75 100644
+--- a/src/xdisp.c
++++ b/src/xdisp.c
+@@ -23539,6 +23539,15 @@ handle_line_prefix (struct it *it)
+ 	 iterator stack overflows.  So, don't wrap the prefix.  */
+       it->line_wrap = TRUNCATE;
+       it->avoid_cursor_p = true;
++
++      /* Increase lnum_pixel_width by width of prefix. This fixes
++	 inital tab offset. This is a poor way to calculate the
++	 width, but I believe the correct way would be to create a
++	 new iterator, insert the prefix, get current_x, then write
++	 the iterator into the top-level one, and that would
++	 increase complexity quite a lot.  */
++      struct face *face = FACE_FROM_ID (it->f, DEFAULT_FACE_ID);
++      it->lnum_pixel_width += face->font->space_width * SCHARS (prefix);
+     }
+ }
+ 
+-- 
+2.29.2
+

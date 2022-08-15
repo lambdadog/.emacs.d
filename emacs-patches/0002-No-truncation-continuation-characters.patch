@@ -1,0 +1,37 @@
+From b747298064337626d15cf4ec82abde74abc5208f Mon Sep 17 00:00:00 2001
+From: Ashlynn Anderson <pea@pea.sh>
+Date: Sun, 14 Aug 2022 21:28:10 -0400
+Subject: [PATCH 2/2] No truncation/continuation characters!
+
+---
+ src/xdisp.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/src/xdisp.c b/src/xdisp.c
+index 7f54074b75..bc8922d89b 100644
+--- a/src/xdisp.c
++++ b/src/xdisp.c
+@@ -3382,13 +3382,13 @@ init_iterator (struct it *it, struct window *w,
+       /* If we truncate lines, leave room for the truncation glyph(s) at
+ 	 the right margin.  Otherwise, leave room for the continuation
+ 	 glyph(s).  Done only if the window has no right fringe.  */
+-      if (WINDOW_RIGHT_FRINGE_WIDTH (it->w) == 0)
+-	{
+-	  if (it->line_wrap == TRUNCATE)
+-	    it->last_visible_x -= it->truncation_pixel_width;
+-	  else
+-	    it->last_visible_x -= it->continuation_pixel_width;
+-	}
++      /* if (WINDOW_RIGHT_FRINGE_WIDTH (it->w) == 0) */
++      /* 	{ */
++      /* 	  if (it->line_wrap == TRUNCATE) */
++      /* 	    it->last_visible_x -= it->truncation_pixel_width; */
++      /* 	  else */
++      /* 	    it->last_visible_x -= it->continuation_pixel_width; */
++      /* 	} */
+ 
+       it->tab_line_p = window_wants_tab_line (w);
+       it->header_line_p = window_wants_header_line (w);
+-- 
+2.29.2
+
