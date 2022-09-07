@@ -22,9 +22,6 @@
 [submodule "deadgrep"]
 	path = lib/deadgrep
 	url = git@github.com:Wilfred/deadgrep.git
-[submodule "doom-themes"]
-	path = lib/doom-themes
-	url = git@github.com:doomemacs/themes.git
 [submodule "ef-themes"]
 	path = lib/ef-themes
 	url = git@github.com:protesilaos/ef-themes.git
