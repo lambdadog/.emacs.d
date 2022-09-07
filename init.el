@@ -82,10 +82,11 @@
   (defun lambdadog:display-line-numbers-hook ()
     (setq-local left-margin-width 0)
     (display-line-numbers-mode +1))
-  ;; TODO: inherit from `solaire-default-face'
-  (let ((color (face-attribute 'solaire-default-face :background)))
-    (dolist (face '(line-number line-number-current-line))
-      (set-face-attribute face nil :background color))))
+  ;; ;; TODO: inherit from `solaire-default-face'
+  ;; (let ((color (face-attribute 'solaire-default-face :background)))
+  ;;   (dolist (face '(line-number line-number-current-line))
+  ;;     (set-face-attribute face nil :background color)))
+  )
 
 (use-package esup
   :custom
@@ -97,22 +98,25 @@
   :config
   (mood-line-mode))
 
-(use-package solaire-mode
-  :demand t
-  :custom
-  (solaire-mode-real-buffer-fn #'lambdadog:real-buffer-fn)
-  :config
-  (defun lambdadog:real-buffer-fn ()
-    (or (solaire-mode-real-buffer-p)
-	(string= (buffer-name) "*dashboard*")))
-  ;; TODO: inherit from `solaire-default-face'
-  (let ((color (face-attribute 'solaire-default-face :background)))
-    (set-face-attribute 'vertical-border nil
-			:foreground color
-			:background color))
-  (dolist (face '(mode-line mode-line-active mode-line-inactive))
-    (setf (alist-get face solaire-mode-remap-alist) nil))
-  (solaire-global-mode +1))
+;; ef-themes does not support solaire mode
+;; TODO: add support
+;;
+;; (use-package solaire-mode
+;;   :demand t
+;;   :custom
+;;   (solaire-mode-real-buffer-fn #'lambdadog:real-buffer-fn)
+;;   :config
+;;   (defun lambdadog:real-buffer-fn ()
+;;     (or (solaire-mode-real-buffer-p)
+;; 	(string= (buffer-name) "*dashboard*")))
+;;   ;; TODO: inherit from `solaire-default-face'
+;;   (let ((color (face-attribute 'solaire-default-face :background)))
+;;     (set-face-attribute 'vertical-border nil
+;; 			:foreground color
+;; 			:background color))
+;;   (dolist (face '(mode-line mode-line-active mode-line-inactive))
+;;     (setf (alist-get face solaire-mode-remap-alist) nil))
+;;   (solaire-global-mode +1))
 
 (use-package ligature
   :demand t
@@ -131,7 +135,7 @@
   (global-ligature-mode 't))
 
 (use-package dashboard
-  :after (solaire-mode)
+  ;; :after (solaire-mode)
   :demand t
   :custom
   (dashboard-set-init-info t)
@@ -175,7 +179,7 @@
 
 ;;; TODO: setup selectrum how I like it
 (use-package selectrum
-  :after (solaire-mode)
+  ;; :after (solaire-mode)
   :demand t
   :custom
   (selectrum-display-action '(display-buffer-in-side-window
@@ -190,7 +194,7 @@
     ;; (with-current-buffer (get-buffer-create " *selectrum-preview*")
     ;;   (setq-local mode-line-format nil)
     ;;   (setq-local cursor-type nil))
-    (buffer-face-set 'solaire-default-face)
+    ;; (buffer-face-set 'solaire-default-face)
     (setq-local mode-line-format nil)
     (setq-local truncate-lines t))
   (defun lambdadog:selectrum-refocus-minibuffer ()
@@ -397,8 +401,6 @@
     (message "hook %s after %s loads" (symbol-name hook) (file-name-base mode-file))
     (with-eval-after-load mode-file
       (add-hook hook #'lsp-bridge-mode))))
-
-  ;; (global-lsp-bridge-mode))
 
 (use-package haskell-mode)
 (use-package rust-mode)

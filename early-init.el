@@ -54,11 +54,22 @@
   (setq inhibit-startup-screen t)
   (setq inhibit-startup-echo-area-message user-login-name)
 
-  (add-to-list 'load-path (expand-file-name "lib/doom-themes/" user-emacs-directory))
+  (add-to-list 'load-path (expand-file-name "lib/ef-themes/" user-emacs-directory))
   (add-to-list 'load-path (expand-file-name "lib/doom-themes/themes/" user-emacs-directory))
-  (require 'doom-palenight-theme)
-  (setq doom-palenight-padded-modeline t)
-  (load-theme 'doom-palenight 'no-confirm)
+  (require 'ef-themes)
+  (setq ef-themes-to-toggle '(ef-summer ef-winter))
+  (ef-themes-select 'ef-summer)
+
+  ;; modeline padding
+  (defun lambdadog:ef-themes-pad-modeline ()
+    (ef-themes-with-colors
+      (custom-set-faces
+       `(mode-line ((,c :inherit mode-line
+			:box (:line-width 4 :color ,bg-mode-line))))
+       `(mode-line-inactive ((,c :inherit mode-line-inactive
+				 :box (:line-width 4 :color ,bg-alt)))))))
+  (add-hook 'ef-themes-post-load-hook #'lambdadog:ef-themes-pad-modeline)
+  (lambdadog:ef-themes-pad-modeline)
 
   (push '(fullscreen . maximized) default-frame-alist)
 
