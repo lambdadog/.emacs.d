@@ -120,9 +120,12 @@
 
 (use-package fira-code-mode
   :demand t
+  :custom
+  (fira-code-mode-disabled-ligatures '("x"))
   :config
   (global-fira-code-mode +1))
 
+;; doesn't display banner?
 (use-package dashboard
   ;; :after (solaire-mode)
   :demand t
