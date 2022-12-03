@@ -99,6 +99,10 @@ setters correctly as opposed to `setq'.
 
   (add-hook 'prog-mode-hook #'display-line-numbers-mode))
 
+(progn ;; mood-line
+  (require 'mood-line)
+  (mood-line-mode +1))
+
 (progn ;; magit
   (with-eval-after-load 'magit
     (declare-function magit-add-section-hook "magit")
