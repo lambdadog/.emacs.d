@@ -70,6 +70,26 @@ defined with defcustom without issues.
   (while (file-exists-p custom-file)
     (load custom-file)))
 
+(progn ;; recentf
+  (with-eval-after-load 'recentf
+    (defvar recentf-exclude)
+    (add-to-list 'recentf-exclude no-littering-var-directory)
+    (add-to-list 'recentf-exclude no-littering-etc-directory)))
+
+(progn ;; display-line-numbers
+  (setc display-line-numbers-type 'relative
+	display-line-numbers-width 3
+	display-line-numbers-current-absolute nil
+	;; FIXME: actually setup emacs patching with new .emacs.d as
+	;;        currently this does nothing...
+	display-line-numbers-pad left-margin-width)
+
+  (defun config:-enable-line-numbers ()
+    (setq-local left-margin-width 0)
+    (display-line-numbers-mode +1))
+
+  (add-hook 'prog-mode-hook #'config:-enable-line-numbers))
+
 (progn ;; magit
   (with-eval-after-load 'magit
     (declare-function magit-add-section-hook "magit")

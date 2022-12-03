@@ -36,6 +36,17 @@
 (push '(tool-bar-lines . 0)   default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
 
+(push '(left-fringe  . 0) default-frame-alist)
+(push '(right-fringe . 0) default-frame-alist)
+(setq-default left-margin-width 1
+	      truncate-lines t)
+
+(let ((display-table (make-display-table)))
+  (set-display-table-slot display-table 'truncation        32)
+  (set-display-table-slot display-table 'wrap              32)
+  (set-display-table-slot display-table 'selective-display 32)
+  (setq-default standard-display-table display-table))
+
 (setq inhibit-startup-buffer-menu t
       inhibit-startup-screen t
       inhibit-startup-echo-area-message user-login-name
