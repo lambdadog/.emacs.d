@@ -90,10 +90,7 @@ setters correctly as opposed to `setq'.
 (progn ;; display-line-numbers
   (setc display-line-numbers-type 'relative
 	display-line-numbers-width 3
-	display-line-numbers-current-absolute nil
-	;; FIXME: actually setup emacs patching with new .emacs.d as
-	;;        currently this does nothing...
-	display-line-numbers-pad left-margin-width)
+	display-line-numbers-current-absolute nil)
 
   (defvar display-line-numbers-mode)
   (defun config:-toggle-left-margin-w-line-numbers ()
