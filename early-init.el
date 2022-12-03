@@ -47,12 +47,6 @@
   (set-display-table-slot display-table 'selective-display 32)
   (setq-default standard-display-table display-table))
 
-(setq inhibit-startup-buffer-menu t
-      inhibit-startup-screen t
-      inhibit-startup-echo-area-message user-login-name
-      initial-buffer-choice t
-      initial-scratch-message "")
-
 (add-to-list 'load-path (locate-user-emacs-file "lib/ef-themes/"))
 (require 'ef-themes)
 (setq ef-themes-to-toggle '(ef-summer ef-winter))

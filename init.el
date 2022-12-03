@@ -32,6 +32,17 @@ setters correctly as opposed to `setq'.
 	'setc
 	,@(nreverse sets)))))
 
+(progn ;; startup config
+  (setc inhibit-startup-buffer-menu t
+	inhibit-startup-screen t
+	inhibit-startup-echo-area-message user-login-name
+	initial-buffer-choice t
+	initial-scratch-message "")
+
+  (defun config:-display-emacs-init-time ()
+    (message (emacs-init-time "Emacs started in %f seconds")))
+  (add-hook 'after-init-hook #'config:-display-emacs-init-time))
+
 (progn ;; no-littering
   (require 'no-littering)
   (setc auto-save-file-name-transforms
