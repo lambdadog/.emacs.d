@@ -59,8 +59,8 @@ setters correctly as opposed to `setq'.
   (defun config:-restore-gc ()
     (run-at-time 1 nil #'config:-do-restore-gc))
 
-  (add-hook 'minibuffer-setup #'config:-defer-gc)
-  (add-hook 'minibuffer-exit  #'config:-restore-gc))
+  (add-hook 'minibuffer-setup-hook #'config:-defer-gc)
+  (add-hook 'minibuffer-exit-hook  #'config:-restore-gc))
 
 (progn ;; customize
   ;; disable user-facing customize interface
