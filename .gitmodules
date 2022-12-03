@@ -29,6 +29,9 @@
 [submodule "magit"]
 	path = lib/magit
 	url = https://github.com/magit/magit
+[submodule "mood-line"]
+	path = lib/mood-line
+	url = https://gitlab.com/jessieh/mood-line
 [submodule "nix-mode"]
 	path = lib/nix-mode
 	url = https://github.com/NixOS/nix-mode
