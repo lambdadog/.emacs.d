@@ -114,6 +114,13 @@ setters correctly as opposed to `setq'.
 (progn ;; vertico
   (require 'vertico)
   (require 'marginalia)
+  (require 'orderless)
+  (setc completion-styles '(orderless basic)
+	completion-category-overrides '((file (styles basic partial-completion))))
+
+  (defun config:-minibuffer-insert-carat ()
+    (insert-char ?^))
+  (add-hook 'minibuffer-setup-hook #'config:-minibuffer-insert-carat)
   ;; TODO: setup something akin to my old selectrum config, with the
   ;; completions showing in a buffer above the minibuffer...
   (vertico-mode +1)
