@@ -95,11 +95,12 @@ setters correctly as opposed to `setq'.
 	;;        currently this does nothing...
 	display-line-numbers-pad left-margin-width)
 
-  (defun config:-enable-line-numbers ()
-    (setq-local left-margin-width 0)
-    (display-line-numbers-mode +1))
+  (defvar display-line-numbers-mode)
+  (defun config:-toggle-left-margin-w-line-numbers ()
+    (setq-local left-margin-width (if display-line-numbers-mode +1 -1)))
+  (add-hook 'display-line-numbers-mode-hook #'config:-toggle-left-margin-w-line-numbers)
 
-  (add-hook 'prog-mode-hook #'config:-enable-line-numbers))
+  (add-hook 'prog-mode-hook #'display-line-numbers-mode))
 
 (progn ;; magit
   (with-eval-after-load 'magit
