@@ -38,6 +38,9 @@
 [submodule "magit"]
 	path = lib/magit
 	url = https://github.com/magit/magit
+[submodule "marginalia"]
+	path = lib/marginalia
+	url = https://github.com/minad/marginalia
 [submodule "mood-line"]
 	path = lib/mood-line
 	url = https://gitlab.com/jessieh/mood-line
