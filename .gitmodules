@@ -1,3 +1,6 @@
+[submodule "auto-compile"]
+	path = lib/auto-compile
+	url = https://github.com/emacscollective/auto-compile
 [submodule "borg"]
 	path = lib/borg
 	url = git@github.com:emacscollective/borg.git
