@@ -29,6 +29,9 @@
 [submodule "nix-mode"]
 	path = lib/nix-mode
 	url = https://github.com/NixOS/nix-mode
+[submodule "no-littering"]
+	path = lib/no-littering
+	url = https://github.com/emacscollective/no-littering
 [submodule "with-editor"]
 	path = lib/with-editor
 	url = https://github.com/magit/with-editor
