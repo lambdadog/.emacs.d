@@ -14,6 +14,8 @@
     (setq gc-cons-threshold restore:gc-cons-threshold
 	  gc-cons-percentage restore:gc-cons-percentage
 	  file-name-handler-alist restore:file-name-handler-alist)))
+
+(declare config:-restore-post-init-settings nil)
 (add-hook 'emacs-startup-hook #'config:-restore-post-init-settings)
 
 ;; auto-compile
