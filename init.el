@@ -111,6 +111,12 @@ setters correctly as opposed to `setq'.
 (progn ;; ctrlf
   (ctrlf-mode +1))
 
+(progn ;; vertico
+  (require 'vertico)
+  ;; TODO: setup something akin to my old selectrum config, with the
+  ;; completions showing in a buffer above the minibuffer...
+  (vertico-mode +1))
+
 (progn ;; magit
   (with-eval-after-load 'magit
     (declare-function magit-add-section-hook "magit")

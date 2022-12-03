@@ -50,7 +50,6 @@
 [submodule "vertico"]
 	path = lib/vertico
 	url = https://github.com/minad/vertico
-	recursive-byte-compile = true
 [submodule "with-editor"]
 	path = lib/with-editor
 	url = https://github.com/magit/with-editor
