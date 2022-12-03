@@ -18,14 +18,15 @@
 system. Uses a custom theme to avoid saving to your
 `custom-file'. Works as `setq', except the value returned is nil.
 
-The benefit of this is that variables can be set before they are
-defined with defcustom without issues.
+The benefit of this is twofold: variables can be set with `setc'
+prior to being defined and will trigger setters correctly as
+opposed to `setq'.
 
 \(fn [SYM VAL] ...)"
   (when (/= (logand (length args) 1) 0)
     (signal 'wrong-number-of-arguments (list 'setc (length args))))
   (let ((sets nil))
-    (while args (push `(list ',(pop args) ',(pop args) nil nil "Customized by setc") sets))
+    (while args (push `(quote (,(pop args) ,(pop args) nil nil "Customized by setc")) sets))
     `(let ((custom--inhibit-theme-enable nil))
        ,(append
 	 '(custom-theme-set-variables
