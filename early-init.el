@@ -10,6 +10,7 @@
 	gc-cons-percentage 0.6
 	file-name-handler-alist nil)
   (defun config:-restore-post-init-settings ()
+    "Restore settings changed in order to speed up init evaluation"
     (setq gc-cons-threshold restore:gc-cons-threshold
 	  gc-cons-percentage restore:gc-cons-percentage
 	  file-name-handler-alist restore:file-name-handler-alist)))
@@ -38,6 +39,22 @@
       inhibit-startup-echo-area-message user-login-name
       initial-buffer-choice t
       initial-scratch-message "")
+
+(add-to-list 'load-path (locate-user-emacs-file "lib/ef-themes/"))
+(require 'ef-themes)
+(setq ef-themes-to-toggle '(ef-summer ef-winter))
+(ef-themes-select 'ef-summer)
+
+(defun config:-ef-themes-pad-modeline ()
+  "Add padding to the modeline of the currently active ef-theme"
+  (ef-themes-with-colors
+   (custom-set-faces
+    `(mode-line ((,c :inherit mode-line
+		     :box (:line-width 4 :color ,bg-mode-line))))
+    `(mode-line-inactive ((,c :inherit mode-line-inactive
+			      :box (:line-width 4 :color ,bg-alt)))))))
+(add-hook 'ef-themes-post-load-hook #'config:-ef-themes-pad-modeline)
+(config:-ef-themes-pad-modeline)
 
 (push '(fullscreen . maximized) default-frame-alist)
 
