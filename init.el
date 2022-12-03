@@ -9,9 +9,9 @@
 
 ;; idea stolen from use-package. allows using customize to set
 ;; variables without them being saved in your custom file
-(deftheme config)
-(enable-theme 'config)
-(setq custom-enabled-themes (remq 'config custom-enabled-themes))
+(deftheme setc)
+(enable-theme 'setc)
+(setq custom-enabled-themes (remq 'setc custom-enabled-themes))
 
 (defmacro setc (&rest args)
   "Set each SYM to the value of its VAL using the customize
@@ -19,8 +19,8 @@ system. Uses a custom theme to avoid saving to your
 `custom-file'. Works as `setq', except the value returned is nil.
 
 The benefit of this is twofold: variables can be set with `setc'
-prior to being defined and will trigger setters correctly as
-opposed to `setq'.
+prior to being defined with `defcustom' and they will trigger
+setters correctly as opposed to `setq'.
 
 \(fn [SYM VAL] ...)"
   (when (/= (logand (length args) 1) 0)
@@ -28,10 +28,9 @@ opposed to `setq'.
   (let ((sets nil))
     (while args (push `(quote (,(pop args) ,(pop args) nil nil "Customized by setc")) sets))
     `(let ((custom--inhibit-theme-enable nil))
-       ,(append
-	 '(custom-theme-set-variables
-	   'config)
-	 (nreverse sets)))))
+       (custom-theme-set-variables
+	'setc
+	,@(nreverse sets)))))
 
 (progn ;; no-littering
   (require 'no-littering)
