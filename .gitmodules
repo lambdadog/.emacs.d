@@ -4,13 +4,22 @@
 [submodule "closql"]
 	path = lib/closql
 	url = git@github.com:emacscollective/closql.git
+[submodule "compat"]
+	path = lib/compat
+	url = https://git.sr.ht/~pkal/compat
+[submodule "dash"]
+	path = lib/dash
+	url = https://github.com/magnars/dash.el
 [submodule "emacsql"]
 	path = lib/emacsql
 	url = git@github.com:skeeto/emacsql.git
 	no-byte-compile = emacsql-pg.el
-[submodule "compat"]
-	path = lib/compat
-	url = https://git.sr.ht/~pkal/compat
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
+[submodule "magit"]
+	path = lib/magit
+	url = https://github.com/magit/magit
+[submodule "with-editor"]
+	path = lib/with-editor
+	url = https://github.com/magit/with-editor
