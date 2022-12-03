@@ -23,6 +23,9 @@
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
+[submodule "esup"]
+	path = lib/esup
+	url = https://github.com/jschaf/esup
 [submodule "macrostep"]
 	path = lib/macrostep
 	url = https://github.com/emacsorphanage/macrostep
