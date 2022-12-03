@@ -61,6 +61,11 @@
     `(mode-line-inactive ((,c :inherit mode-line-inactive
 			      :box (:line-width 4 :color ,bg-alt)))))))
 (add-hook 'ef-themes-post-load-hook #'config:-ef-themes-pad-modeline)
+
+;; `ef-themes-select' must have already been called before
+;; `ef-themes-with-colors' is used, so we must run this manually
+;; rather than relying on our `ef-themes-select' invocation to call it
+;; as a hook.
 (config:-ef-themes-pad-modeline)
 
 (push '(fullscreen . maximized) default-frame-alist)
