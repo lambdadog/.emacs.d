@@ -25,7 +25,7 @@ defined with defcustom without issues.
   (when (/= (logand (length args) 1) 0)
     (signal 'wrong-number-of-arguments (list 'setc (length args))))
   (let ((sets nil))
-    (while args (push `(list ',(pop args) ,(pop args) nil nil "Customized by setc") sets))
+    (while args (push `(list ',(pop args) ',(pop args) nil nil "Customized by setc") sets))
     `(let ((custom--inhibit-theme-enable nil))
        ,(append
 	 '(custom-theme-set-variables
