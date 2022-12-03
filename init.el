@@ -113,9 +113,11 @@ setters correctly as opposed to `setq'.
 
 (progn ;; vertico
   (require 'vertico)
+  (require 'marginalia)
   ;; TODO: setup something akin to my old selectrum config, with the
   ;; completions showing in a buffer above the minibuffer...
-  (vertico-mode +1))
+  (vertico-mode +1)
+  (marginalia-mode +1))
 
 (progn ;; magit
   (with-eval-after-load 'magit
