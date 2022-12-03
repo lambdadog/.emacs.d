@@ -23,6 +23,9 @@
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
+[submodule "macrostep"]
+	path = lib/macrostep
+	url = https://github.com/emacsorphanage/macrostep
 [submodule "magit"]
 	path = lib/magit
 	url = https://github.com/magit/magit
