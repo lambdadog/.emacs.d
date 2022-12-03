@@ -108,6 +108,9 @@ setters correctly as opposed to `setq'.
   (setc fira-code-mode-disabled-ligatures '("x"))
   (global-fira-code-mode +1))
 
+(progn ;; ctrlf
+  (ctrlf-mode +1))
+
 (progn ;; magit
   (with-eval-after-load 'magit
     (declare-function magit-add-section-hook "magit")
