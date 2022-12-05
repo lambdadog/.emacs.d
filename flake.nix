@@ -23,11 +23,7 @@
         ];
       };
     in rec {
-      packages.emacs = pkgs.emacsGitNativeComp.pkgs.withPackages (_: with pkgs; [
-        # Adding packages here adds their /bin to emacs' PATH so I
-        # don't need to install them globally.
-        imagemagick
-      ]);
+      packages.emacs = pkgs.emacsGitNativeComp;
       apps.emacs = flake-utils.lib.mkApp {
         name = "emacs";
         drv = packages.emacs;
