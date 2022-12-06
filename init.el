@@ -133,4 +133,4 @@ setters correctly as opposed to `setq'.
     (magit-status-setup-buffer user-emacs-directory))
 
   (keymap-global-set "C-x g" #'magit-status)
-  (keymap-global-set "C-x C-g" #'config:magit-status-for-emacsd))
+  (keymap-global-set "C-x G" #'config:magit-status-for-emacsd))
