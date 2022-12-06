@@ -3,8 +3,9 @@
   (load-file (locate-user-emacs-file "early-init.el")))
 
 (eval-and-compile ;; borg
-  (add-to-list 'load-path (expand-file-name "lib/borg" user-emacs-directory))
+  (add-to-list 'load-path (locate-user-emacs-file "lib/borg"))
   (require 'borg)
+  (load-file (locate-user-emacs-file "etc/borg/config.el"))
   (borg-initialize))
 
 ;; idea stolen from use-package. allows using customize to set
