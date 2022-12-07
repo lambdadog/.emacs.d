@@ -1,3 +1,4 @@
 var/
+eln-cache/
 result
 *.elc

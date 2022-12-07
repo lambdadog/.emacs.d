@@ -31,20 +31,6 @@
 (advice-add #'package--ensure-init-file :override #'ignore)
 (advice-add #'package--save-selected-packages :override #'ignore)
 
-;; no-littering
-;;
-;; We don't want to actually load no-littering during early-init so we
-;; hardcode /var, but if I ever change no-littering-var-directory it
-;; will error, notifying me to fix it.
-(let ((eln-cache-dir (expand-file-name (locate-user-emacs-file "var/eln-cache/"))))
-  (startup-redirect-eln-cache eln-cache-dir)
-
-  (with-eval-after-load 'no-littering
-    (defvar no-littering-var-directory)
-    (unless (string-prefix-p (expand-file-name no-littering-var-directory) eln-cache-dir)
-      (error "%s is not within `no-littering-var-directory', update your early-init.el"
-	     eln-cache-dir))))
-
 ;; Early visual customizations to avoid the emacs flash
 (push '(menu-bar-lines . 0)   default-frame-alist)
 (push '(tool-bar-lines . 0)   default-frame-alist)
