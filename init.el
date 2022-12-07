@@ -47,7 +47,7 @@ setters correctly as opposed to `setq'.
 (progn ;; no-littering
   (require 'no-littering)
   (setc auto-save-file-name-transforms
-     `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
+	`((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
 (progn ;; minibuffer performance tweaks 
   (let ((restore:gc-cons-threshold gc-cons-threshold))
