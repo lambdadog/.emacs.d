@@ -9,11 +9,16 @@
   (setq gc-cons-threshold most-positive-fixnum
 	gc-cons-percentage 0.6
 	file-name-handler-alist nil)
-  (defun config:-restore-post-init-settings ()
-    "Restore settings changed in order to speed up init evaluation"
+  (defun config:-do-restore-post-init-settings ()
     (setq gc-cons-threshold restore:gc-cons-threshold
 	  gc-cons-percentage restore:gc-cons-percentage
-	  file-name-handler-alist restore:file-name-handler-alist)))
+	  file-name-handler-alist restore:file-name-handler-alist))
+  (defun config:-restore-post-init-settings ()
+    "Restore settings changed in order to speed up init evaluation."
+    (let ((timer (timer-create)))
+      (timer-set-time timer 0 nil)
+      (timer-set-function timer #'config:-do-restore-post-init-settings)
+      (timer-activate-when-idle timer t))))
 
 (declare config:-restore-post-init-settings nil)
 (add-hook 'emacs-startup-hook #'config:-restore-post-init-settings)

@@ -70,7 +70,10 @@ on startup if even conceivably possible."
   (defun config:-defer-gc ()
     (setq gc-cons-threshold most-positive-fixnum))
   (defun config:-restore-gc ()
-    (run-at-time 1 nil #'config:-do-restore-gc))
+    (let ((timer (timer-create)))
+      (timer-set-time timer 0 nil)
+      (timer-set-function timer #'config:-do-restore-gc)
+      (timer-activate-when-idle timer t)))
 
   (add-hook 'minibuffer-setup-hook #'config:-defer-gc)
   (add-hook 'minibuffer-exit-hook  #'config:-restore-gc))
