@@ -13,6 +13,7 @@
     (setq gc-cons-threshold restore:gc-cons-threshold
 	  gc-cons-percentage restore:gc-cons-percentage
 	  file-name-handler-alist restore:file-name-handler-alist))
+  (declare-function config:-do-restore-post-init-settings nil)
   (defun config:-restore-post-init-settings ()
     "Restore settings changed in order to speed up init evaluation."
     (let ((timer (timer-create)))
@@ -20,7 +21,6 @@
       (timer-set-function timer #'config:-do-restore-post-init-settings)
       (timer-activate-when-idle timer t))))
 
-(declare config:-restore-post-init-settings nil)
 (add-hook 'emacs-startup-hook #'config:-restore-post-init-settings)
 
 ;; auto-compile
@@ -32,6 +32,8 @@
 (auto-compile-on-save-mode +1)
 
 ;; package.el
+(declare-function package--ensure-init-file "package")
+(declare-function package--save-selected-packages "package")
 (setq package-enable-at-startup nil)
 (advice-add #'package--ensure-init-file :override #'ignore)
 (advice-add #'package--save-selected-packages :override #'ignore)
