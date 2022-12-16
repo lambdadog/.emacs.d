@@ -10,6 +10,9 @@
 
 ;; idea stolen from use-package. allows using customize to set
 ;; variables without them being saved in your custom file
+;;
+;; if there's a speed difference to using this over setq I haven't
+;; been able to observe it
 (deftheme setc)
 (defmacro setc (&rest args)
   "Set each SYM to the value of its VAL using the customize
