@@ -32,6 +32,9 @@
 [submodule "fira-code-mode"]
 	path = lib/fira-code-mode
 	url = https://github.com/jming422/fira-code-mode
+[submodule "llama"]
+	path = lib/llama
+	url = git@github.com:emacsmirror/llama.git
 [submodule "macrostep"]
 	path = lib/macrostep
 	url = https://github.com/emacsorphanage/macrostep
