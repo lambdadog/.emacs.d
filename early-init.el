@@ -85,9 +85,10 @@
   (setq-default standard-display-table display-table))
 
 (add-to-list 'load-path (locate-user-emacs-file "lib/ef-themes/"))
-(require 'ef-themes)
 (setq ef-themes-to-toggle '(ef-summer ef-winter))
-(ef-themes-select 'ef-summer)
+(let ((custom--inhibit-theme-enable nil))
+  (load "ef-summer-theme" nil 'no-message nil 'must-suffix)
+  (push 'ef-summer custom-enabled-themes))
 
 (defun config:-ef-themes-pad-modeline ()
   "Add padding to the modeline of the currently active ef-theme"
@@ -98,11 +99,6 @@
     `(mode-line-inactive ((,c :inherit mode-line-inactive
 			      :box (:line-width 4 :color ,bg-alt)))))))
 (add-hook 'ef-themes-post-load-hook #'config:-ef-themes-pad-modeline)
-
-;; `ef-themes-select' must have already been called before
-;; `ef-themes-with-colors' is used, so we must run this manually
-;; rather than relying on our `ef-themes-select' invocation to call it
-;; as a hook.
 (config:-ef-themes-pad-modeline)
 
 (push '(fullscreen . maximized) default-frame-alist)
