@@ -57,8 +57,7 @@ on startup if even conceivably possible."
   (add-hook 'after-init-hook #'config:-display-emacs-init-time))
 
 (progn ;; aesthetic
-  (setc window-combination-resize t
-	x-stretch-cursor t))
+  (setc window-combination-resize t))
 
 (progn ;; no-littering
   (require 'no-littering)
