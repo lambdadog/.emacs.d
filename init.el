@@ -56,6 +56,10 @@ on startup if even conceivably possible."
     (message (emacs-init-time "Emacs started in %f seconds")))
   (add-hook 'after-init-hook #'config:-display-emacs-init-time))
 
+(progn ;; aesthetic
+  (setc window-combination-resize t
+	x-stretch-cursor t))
+
 (progn ;; no-littering
   (require 'no-littering)
   (setc auto-save-file-name-transforms

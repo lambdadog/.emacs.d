@@ -23,6 +23,17 @@
 
 (add-hook 'emacs-startup-hook #'config:-restore-post-init-settings)
 
+(setq-default bidi-display-reordering 'left-to-right
+              bidi-paragraph-direction 'left-to-right
+	      cursor-in-non-selected-windows nil)
+(setq bidi-inhibit-bpa t
+      highlight-nonselected-windows nil
+      fast-but-imprecise-scrolling t
+      ffap-machine-p-known 'reject
+      idle-update-delay 1.0
+      read-process-output-max (* 64 1024)
+      redisplay-skip-fontification-on-input t)
+
 ;; auto-compile
 (setq load-prefer-newer t)
 (add-to-list 'load-path (locate-user-emacs-file "lib/compat/"))
@@ -42,6 +53,25 @@
 (push '(menu-bar-lines . 0)   default-frame-alist)
 (push '(tool-bar-lines . 0)   default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
+(setq menu-bar-mode nil
+      tool-bar-mode nil
+      scroll-bar-mode nil)
+
+;; On MacOS, disabling the menu bar makes MacOS treat Emacs as a
+;; "non-application window", which causes a number of undesireable
+;; behaviors.
+(when (eq system-type 'darwin)
+  (defun config:-restore-menu-bar-in-gui-frames (&optional frame)
+    (when-let (frame (or frame (selected-frame)))
+      (when (display-graphic-p frame)
+	(set-frame-parameter frame 'menu-bar-lines 1))))
+
+  (declare-function config:-restore-menu-bar-in-gui-frames nil)
+  (add-hook 'window-setup-hook
+	    #'config:-restore-menu-bar-in-gui-frames)
+  (add-hook 'after-make-frame-functions
+	    #'config:-restore-menu-bar-in-gui-frames))
+
 
 (push '(left-fringe  . 0) default-frame-alist)
 (push '(right-fringe . 0) default-frame-alist)
