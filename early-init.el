@@ -26,7 +26,8 @@
 (setq-default bidi-display-reordering 'left-to-right
               bidi-paragraph-direction 'left-to-right
 	      cursor-in-non-selected-windows nil)
-(setq bidi-inhibit-bpa t
+(setq vc-handled-backends nil
+      bidi-inhibit-bpa t
       highlight-nonselected-windows nil
       fast-but-imprecise-scrolling t
       ffap-machine-p-known 'reject
