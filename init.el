@@ -104,8 +104,7 @@ on startup if even conceivably possible."
 (progn ;; recentf
   (with-eval-after-load 'recentf
     (defvar recentf-exclude)
-    (add-to-list 'recentf-exclude no-littering-var-directory)
-    (add-to-list 'recentf-exclude no-littering-etc-directory)))
+    (add-to-list 'recentf-exclude no-littering-var-directory)))
 
 (progn ;; display-line-numbers
   (setc display-line-numbers-type 'relative
