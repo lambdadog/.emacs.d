@@ -11,9 +11,6 @@
 ;; idea stolen from use-package. allows using customize to set
 ;; variables without them being saved in your custom file
 (deftheme setc)
-(enable-theme 'setc)
-(setq custom-enabled-themes (remq 'setc custom-enabled-themes))
-
 (defmacro setc (&rest args)
   "Set each SYM to the value of its VAL using the customize
 system. Uses a custom theme to avoid saving to your
