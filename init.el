@@ -2,6 +2,12 @@
 (when (bound-and-true-p esup-child-parent-log-process)
   (load-file (locate-user-emacs-file "early-init.el")))
 
+(eval-and-compile
+  (when (or (< emacs-major-version 29)
+	    (and (= emacs-major-version 29)
+		 (< emacs-minor-version 1)))
+    (load (locate-user-emacs-file "polyfill/29.1.el"))))
+
 (eval-and-compile ;; borg
   (add-to-list 'load-path (locate-user-emacs-file "lib/borg"))
   (require 'borg)
