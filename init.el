@@ -144,6 +144,13 @@ on startup if even conceivably possible."
   (vertico-mode +1)
   (marginalia-mode +1))
 
+(progn ;; eat/eshell
+  (setc eshell-visual-commands nil)
+  (defun config:-load-eat-before-eshell (&rest _)
+    (eat-eshell-mode +1)
+    (advice-remove #'eshell #'config:-load-eat-before-eshell))
+  (advice-add #'eshell :before #'config:-load-eat-before-eshell))
+
 (progn ;; magit
   (with-eval-after-load 'magit
     (declare-function magit-add-section-hook "magit")
