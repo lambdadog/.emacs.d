@@ -16,6 +16,9 @@
 [submodule "dash"]
 	path = lib/dash
 	url = https://github.com/magnars/dash.el
+[submodule "eat"]
+	path = lib/eat
+	url = https://codeberg.org/akib/emacs-eat
 [submodule "ef-themes"]
 	path = lib/ef-themes
 	url = git@github.com:emacsmirror/ef-themes.git
