@@ -10,6 +10,9 @@
 [submodule "compat"]
 	path = lib/compat
 	url = https://git.sr.ht/~pkal/compat
+[submodule "corfu"]
+	path = lib/corfu
+	url = https://github.com/minad/corfu
 [submodule "ctrlf"]
 	path = lib/ctrlf
 	url = https://github.com/radian-software/ctrlf
