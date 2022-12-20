@@ -151,6 +151,10 @@ on startup if even conceivably possible."
     (advice-remove #'eshell #'config:-load-eat-before-eshell))
   (advice-add #'eshell :before #'config:-load-eat-before-eshell))
 
+;; This isn't configured *well* yet, but it's nicer to have than not.
+(progn ;; corfu
+  (global-corfu-mode +1))
+
 (progn ;; magit
   (with-eval-after-load 'magit
     (declare-function magit-add-section-hook "magit")
