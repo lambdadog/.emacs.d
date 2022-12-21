@@ -3,9 +3,7 @@
   (load-file (locate-user-emacs-file "early-init.el")))
 
 (eval-and-compile
-  (when (or (< emacs-major-version 29)
-	    (and (= emacs-major-version 29)
-		 (< emacs-minor-version 1)))
+  (when (< emacs-major-version 29)
     (load (locate-user-emacs-file "shim/29.1.el"))))
 
 (eval-and-compile ;; borg
@@ -38,6 +36,10 @@ setters correctly as opposed to `setq'.
        (custom-theme-set-variables
 	'setc
 	,@(nreverse sets)))))
+
+(progn ;; epkg
+  (when (>= emacs-major-version 29)
+    (setc epkg-database-connector 'sqlite-builtin)))
 
 (progn ;; startup config
   (setc inhibit-startup-buffer-menu t
