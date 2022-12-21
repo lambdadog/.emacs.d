@@ -6,7 +6,7 @@
   (when (or (< emacs-major-version 29)
 	    (and (= emacs-major-version 29)
 		 (< emacs-minor-version 1)))
-    (load (locate-user-emacs-file "polyfill/29.1.el"))))
+    (load (locate-user-emacs-file "shim/29.1.el"))))
 
 (eval-and-compile ;; borg
   (add-to-list 'load-path (locate-user-emacs-file "lib/borg"))
