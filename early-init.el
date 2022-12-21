@@ -94,11 +94,10 @@
 (defun config:-ef-themes-pad-modeline ()
   "Add padding to the modeline of the currently active ef-theme"
   (ef-themes-with-colors
-   (custom-set-faces
-    `(mode-line ((,c :inherit mode-line
-		     :box (:line-width 4 :color ,bg-mode-line))))
-    `(mode-line-inactive ((,c :inherit mode-line-inactive
-			      :box (:line-width 4 :color ,bg-alt)))))))
+    (set-face-attribute 'mode-line nil
+			:box `(:line-width 4 :color ,bg-mode-line))
+    (set-face-attribute 'mode-line-inactive nil
+			:box `(:line-width 4 :color ,bg-alt))))
 (add-hook 'ef-themes-post-load-hook #'config:-ef-themes-pad-modeline)
 (config:-ef-themes-pad-modeline)
 
