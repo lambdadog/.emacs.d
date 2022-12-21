@@ -1,3 +1,5 @@
+[borg]
+	extra-build-step = (config/borg-add-exclude-rules borg-clone)
 [submodule "auto-compile"]
 	path = lib/auto-compile
 	url = https://github.com/emacscollective/auto-compile
