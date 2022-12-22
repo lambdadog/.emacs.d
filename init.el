@@ -135,9 +135,7 @@ on startup if even conceivably possible."
 (progn ;; fira-code-mode
   (require 'fira-code-mode)
   (setc fira-code-mode-disabled-ligatures '("x"))
-  ;; https://github.com/jming422/fira-code-mode/issues/27
-  ;; https://codeberg.org/akib/emacs-eat/issues/26
-  (add-hook 'prog-mode-hook #'fira-code-mode))
+  (global-fira-code-mode +1))
 
 (progn ;; ctrlf
   (ctrlf-mode +1))
