@@ -108,7 +108,7 @@ on startup if even conceivably possible."
   ;; `custom-file' is still used internally by emacs to store some data,
   ;; even though we've disabled all of its user-facing functions.
   (setc custom-file (no-littering-expand-etc-file-name "custom.el"))
-  (while (file-exists-p custom-file)
+  (when (file-exists-p custom-file)
     (load custom-file)))
 
 (progn ;; recentf
