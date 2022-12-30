@@ -23,6 +23,8 @@
 
 (add-hook 'emacs-startup-hook #'config:-restore-post-init-settings)
 
+(setq warning-suppress-types '((comp)))
+
 (setq-default bidi-display-reordering 'left-to-right
               bidi-paragraph-direction 'left-to-right
 	      cursor-in-non-selected-windows nil)
