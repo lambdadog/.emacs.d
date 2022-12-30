@@ -88,12 +88,16 @@
   (setq-default standard-display-table display-table))
 
 (add-to-list 'load-path (locate-user-emacs-file "lib/ef-themes/"))
-;; (setq ef-themes-to-toggle '(ef-summer ef-winter))
-;; (let ((custom--inhibit-theme-enable nil))
-;;   (load "ef-summer-theme" nil 'no-message nil 'must-suffix)
-;;   (push 'ef-summer custom-enabled-themes))
 (require 'ef-themes)
-(ef-themes-load-random)
+
+;; hack for faster theme loading. We're essentially reimplementing
+;; `ef-themes-load-random' here but with a faster "load theme"
+;; implementation that's just coherent enough for our initial loadup
+(let* ((themes (ef-themes--list-known-themes))
+       (choice (nth (random (length themes)) themes)))
+  (let ((custom--inhibit-theme-enable nil))
+    (load (concat (symbol-name choice) "-theme") nil 'no-message nil 'must-suffix)
+    (push choice custom-enabled-themes)))
 
 (defun config:-ef-themes-pad-modeline ()
   "Add padding to the modeline of the currently active ef-theme"
