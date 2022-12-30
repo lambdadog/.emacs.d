@@ -140,6 +140,9 @@ on startup if even conceivably possible."
 (progn ;; ctrlf
   (ctrlf-mode +1))
 
+;; I have played around with icomplete-vertical some and it's not bad
+;; with decent settings, but it has some minor issues that bug me
+;; enough to stick to vertico
 (progn ;; vertico
   (require 'vertico)
   (require 'marginalia)
