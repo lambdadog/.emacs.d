@@ -88,10 +88,12 @@
   (setq-default standard-display-table display-table))
 
 (add-to-list 'load-path (locate-user-emacs-file "lib/ef-themes/"))
-(setq ef-themes-to-toggle '(ef-summer ef-winter))
-(let ((custom--inhibit-theme-enable nil))
-  (load "ef-summer-theme" nil 'no-message nil 'must-suffix)
-  (push 'ef-summer custom-enabled-themes))
+;; (setq ef-themes-to-toggle '(ef-summer ef-winter))
+;; (let ((custom--inhibit-theme-enable nil))
+;;   (load "ef-summer-theme" nil 'no-message nil 'must-suffix)
+;;   (push 'ef-summer custom-enabled-themes))
+(require 'ef-themes)
+(ef-themes-load-random)
 
 (defun config:-ef-themes-pad-modeline ()
   "Add padding to the modeline of the currently active ef-theme"
