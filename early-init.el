@@ -93,7 +93,7 @@
 ;; hack for faster theme loading. We're essentially reimplementing
 ;; `ef-themes-load-random' here but with a faster "load theme"
 ;; implementation that's just coherent enough for our initial loadup
-(let* ((themes (ef-themes--list-known-themes))
+(let* ((themes ef-themes-collection)
        (choice (nth (random (length themes)) themes)))
   (let ((custom--inhibit-theme-enable nil))
     (load (concat (symbol-name choice) "-theme") nil 'no-message nil 'must-suffix)
