@@ -167,18 +167,16 @@ on startup if even conceivably possible."
 	'light
       'dark))
 
-  (defun config:-ef-themes-toggle-random (oldfun &optional variant)
+  (defun config:-ef-themes-toggle-random (_oldfun)
     "Overrides `ef-themes-toggle' to toggle to a random theme of the
 opposite variant of the current theme.
 
 Cursed, but one of those things you do in your own config and
 never share."
-    (let ((new-variant (if variant
-			   variant
-			 (if (eq (config:-ef-themes-current-variant) 'dark)
+    (let ((new-variant (if (eq (config:-ef-themes-current-variant) 'dark)
 			     'light
-			   'dark))))
-      (funcall oldfun new-variant)))
+			   'dark)))
+      (ef-themes-load-random new-variant)))
 
   (defun config:-ef-themes-random-in-variant (args)
     "Advises `ef-themes-load-random' to always random within the same
