@@ -107,9 +107,16 @@
     (set-face-attribute 'mode-line-inactive nil
 			:box `(:line-width 4 :color ,bg-alt))))
 (add-hook 'ef-themes-post-load-hook #'config:-ef-themes-pad-modeline)
+
+(defun config:-ef-themes-disable-italics ()
+  "Disable italics entirely"
+  (make-face-unitalic 'italic))
+(add-hook 'ef-themes-post-load-hook #'config:-ef-themes-disable-italics)
+
 (config:-ef-themes-pad-modeline)
+(config:-ef-themes-disable-italics)
 
 (push '(fullscreen . maximized) default-frame-alist)
 
-(setq-default line-spacing 1)
-(push '(font . "Fira Code") default-frame-alist)
+;; https://berkeleygraphics.com/
+(push '(font . "Berkeley Mono") default-frame-alist)
