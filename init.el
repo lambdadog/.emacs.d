@@ -6,6 +6,12 @@
   (when (< emacs-major-version 29)
     (load (locate-user-emacs-file "shim/29.1.el"))))
 
+;; TODO: split WSL off into a wsl.el to be loaded on WSL
+;; Not portable, but my WSL setup is my WSL setup
+(defconst is-wsl (string= "alpine-wsl" (system-name)))
+(when is-wsl
+  (set-face-attribute 'default nil :height 100))
+
 (eval-and-compile ;; borg
   (add-to-list 'load-path (locate-user-emacs-file "lib/borg"))
   (require 'borg)
@@ -217,3 +223,31 @@ always loads another light ef-theme and the same for dark."
 
   (keymap-global-set "C-x g" #'magit-status)
   (keymap-global-set "C-x G" #'config:magit-status-for-emacsd))
+
+;; show-paren-mode errors for some reason on Alpine WSL
+(when is-wsl
+  (show-paren-mode -1)
+
+  (defun shell-command-on-str (cmd &optional str)
+    "Insert result of calling CMD with STR as input.
+
+STR is current-kill if unspecified.
+"
+    (interactive (list (read-shell-command "Shell command on region: ")))
+    (setq str (or str
+                  (current-kill 0)))
+    (insert (with-temp-buffer
+              (insert str)
+              (shell-command-on-region (point-min) (point-max) cmd nil 'replace)
+              (buffer-string))))
+  (declare-function shell-command-on-str nil)
+
+  (defun wsl-update-clip (&rest _args)
+    (interactive)
+    (shell-command-on-str "clip.exe"))
+  (declare-function wsl-update-clip nil)
+
+  (advice-add 'kill-new :after #'wsl-update-clip))
+
+(with-eval-after-load 'ox
+  (require 'ox-sb))
