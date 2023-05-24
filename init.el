@@ -132,10 +132,19 @@ on startup if even conceivably possible."
   (require 'mood-line)
   (mood-line-mode +1))
 
-(progn ;; fira-code-mode
-  (require 'fira-code-mode)
-  (setc fira-code-mode-disabled-ligatures '("x"))
-  (global-fira-code-mode +1))
+;; Enable ligatures in programming modes
+(ligature-set-ligatures 'prog-mode '("www" "**" "***" "**/" "*>" "*/" "\\\\" "\\\\\\" "{-" "::"
+                                     ":::" ":=" "!!" "!=" "!==" "-}" "----" "-->" "->" "->>"
+                                     "-<" "-<<" "-~" "#{" "#[" "##" "###" "####" "#(" "#?" "#_"
+                                     "#_(" ".-" ".=" ".." "..<" "..." "?=" "??" ";;" "/*" "/**"
+                                     "/=" "/==" "/>" "//" "///" "&&" "||" "||=" "|=" "|>" "^=" "$>"
+                                     "++" "+++" "+>" "=:=" "==" "===" "==>" "=>" "=>>" "<="
+                                     "=<<" "=/=" ">-" ">=" ">=>" ">>" ">>-" ">>=" ">>>" "<*"
+                                     "<*>" "<|" "<|>" "<$" "<$>" "<!--" "<-" "<--" "<->" "<+"
+                                     "<+>" "<=" "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<"
+                                     "<~" "<~~" "</" "</>" "~@" "~-" "~>" "~~" "~~>" "%%"))
+
+(global-ligature-mode 't)
 
 (progn ;; ctrlf
   (ctrlf-mode +1))
