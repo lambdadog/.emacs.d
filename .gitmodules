@@ -37,9 +37,6 @@
 [submodule "esup"]
 	path = lib/esup
 	url = https://github.com/jschaf/esup
-[submodule "fira-code-mode"]
-	path = lib/fira-code-mode
-	url = https://github.com/jming422/fira-code-mode
 [submodule "haskell-mode"]
 	path = lib/haskell-mode
 	url = https://github.com/haskell/haskell-mode
