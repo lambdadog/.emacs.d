@@ -54,24 +54,24 @@ setters correctly as opposed to `setq'.
 	initial-buffer-choice t
 	initial-scratch-message "")
 
-(defun config:-trim-windows-on-startup ()
-  "Work around emacs' persistent desire to open exactly two windows
+  (defun config:-trim-windows-on-startup ()
+    "Work around emacs' persistent desire to open exactly two windows
 on startup if even conceivably possible."
-  ;; `count-windows' apparently doesn't work yet when this hook is
-  ;; run, so we just have to try and kill scratch and ignore the
-  ;; error if it fails due to being the only open window.
-  ;;
-  ;; `initial-buffer-choice' being set to `t' is essentially what
-  ;; makes this hack work. Since *scratch* will always be one of our
-  ;; windows we can just hardcode closing it and get correct
-  ;; behavior.
-  (ignore-errors
-    (delete-window (get-buffer-window "*scratch*"))))
-(add-hook 'emacs-startup-hook #'config:-trim-windows-on-startup)
+    ;; `count-windows' apparently doesn't work yet when this hook is
+    ;; run, so we just have to try and kill scratch and ignore the
+    ;; error if it fails due to being the only open window.
+    ;;
+    ;; `initial-buffer-choice' being set to `t' is essentially what
+    ;; makes this hack work. Since *scratch* will always be one of our
+    ;; windows we can just hardcode closing it and get correct
+    ;; behavior.
+    (ignore-errors
+      (delete-window (get-buffer-window "*scratch*"))))
+  (add-hook 'emacs-startup-hook #'config:-trim-windows-on-startup)
 
-(defun config:-display-emacs-init-time ()
-  (message (emacs-init-time "Emacs started in %f seconds")))
-(add-hook 'after-init-hook #'config:-display-emacs-init-time))
+  (defun config:-display-emacs-init-time ()
+    (message (emacs-init-time "Emacs started in %f seconds")))
+  (add-hook 'after-init-hook #'config:-display-emacs-init-time))
 
 (progn ;; aesthetic
   (setc window-combination-resize t))
