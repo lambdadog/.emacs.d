@@ -27,6 +27,9 @@
 [submodule "ef-themes"]
 	path = lib/ef-themes
 	url = git@github.com:emacsmirror/ef-themes.git
+[submodule "elixir-mode"]
+	path = lib/elixir-mode
+	url = https://github.com/elixir-editors/emacs-elixir
 [submodule "emacsql"]
 	path = lib/emacsql
 	url = git@github.com:skeeto/emacsql.git
