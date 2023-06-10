@@ -34,6 +34,10 @@
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
+[submodule "erlang"]
+	path = lib/erlang
+	url = https://github.com/erlang/otp
+	load-path = lib/tools/emacs/
 [submodule "esup"]
 	path = lib/esup
 	url = https://github.com/jschaf/esup
