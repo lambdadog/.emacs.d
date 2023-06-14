@@ -86,6 +86,9 @@
 [submodule "with-editor"]
 	path = lib/with-editor
 	url = https://github.com/magit/with-editor
+[submodule "writegood-mode"]
+	path = lib/writegood-mode
+	url = https://github.com/bnbeckwith/writegood-mode
 [submodule "zig-mode"]
 	path = lib/zig-mode
 	url = https://github.com/ziglang/zig-mode
