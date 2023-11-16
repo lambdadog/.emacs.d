@@ -65,6 +65,9 @@
 [submodule "markdown-mode"]
 	path = lib/markdown-mode
 	url = https://github.com/jrblevin/markdown-mode
+[submodule "meson-mode"]
+	path = lib/meson-mode
+	url = https://github.com/wentasah/meson-mode
 [submodule "mood-line"]
 	path = lib/mood-line
 	url = https://gitlab.com/jessieh/mood-line
