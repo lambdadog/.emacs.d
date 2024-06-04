@@ -225,6 +225,10 @@ always loads another light ef-theme and the same for dark."
                           'magit-insert-stashes
                           'append))
 
+;; allegedly improves magit performance
+(when is-wsl
+  (setc magit-git-executable "/usr/bin/git"))
+
 (autoload #'magit-status-setup-buffer "magit")
 (declare-function magit-status-setup-buffer "magit")
 
@@ -262,3 +266,7 @@ STR is current-kill if unspecified.
 
 (with-eval-after-load 'ox
   (require 'ox-sb))
+
+;; (defvar elixir-mode-hook)
+;; (add-hook 'elixir-mode-hook
+;; 	  (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
