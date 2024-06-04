@@ -6,6 +6,9 @@
 [submodule "borg"]
 	path = lib/borg
 	url = git@github.com:emacscollective/borg.git
+[submodule "bui"]
+	path = lib/bui
+	url = https://github.com/alezost/bui.el
 [submodule "closql"]
 	path = lib/closql
 	url = git@github.com:emacscollective/closql.git
@@ -18,6 +21,9 @@
 [submodule "ctrlf"]
 	path = lib/ctrlf
 	url = https://github.com/radian-software/ctrlf
+[submodule "dap-mode"]
+	path = lib/dap-mode
+	url = https://github.com/emacs-lsp/dap-mode
 [submodule "dash"]
 	path = lib/dash
 	url = https://github.com/magnars/dash.el
@@ -44,15 +50,35 @@
 [submodule "esup"]
 	path = lib/esup
 	url = https://github.com/jschaf/esup
+[submodule "f"]
+	path = lib/f
+	url = https://github.com/rejeep/f.el
 [submodule "haskell-mode"]
 	path = lib/haskell-mode
 	url = https://github.com/haskell/haskell-mode
+[submodule "ht"]
+	path = lib/ht
+	url = https://github.com/Wilfred/ht.el
+[submodule "hydra"]
+	path = lib/hydra
+	url = https://github.com/abo-abo/hydra
 [submodule "ligature"]
 	path = lib/ligature
 	url = https://github.com/mickeynp/ligature.el
 [submodule "llama"]
 	path = lib/llama
 	url = git@github.com:emacsmirror/llama.git
+[submodule "lsp-docker"]
+	path = lib/lsp-docker
+	url = https://github.com/emacs-lsp/lsp-docker
+[submodule "lsp-mode"]
+	path = lib/lsp-mode
+	url = https://github.com/emacs-lsp/lsp-mode
+	load-path = ./
+	load-path = clients/
+[submodule "lsp-treemacs"]
+	path = lib/lsp-treemacs
+	url = https://github.com/emacs-lsp/lsp-treemacs
 [submodule "macrostep"]
 	path = lib/macrostep
 	url = https://github.com/emacsorphanage/macrostep
@@ -80,6 +106,22 @@
 [submodule "ox-sb"]
 	path = lib/ox-sb
 	url = git@github.com:lambdadog/ox-sb.git
+[submodule "pfuture"]
+	path = lib/pfuture
+	url = https://github.com/Alexander-Miller/pfuture
+[submodule "posframe"]
+	path = lib/posframe
+	url = https://github.com/tumashu/posframe
+[submodule "s"]
+	path = lib/s
+	url = https://github.com/magnars/s.el
+[submodule "spinner"]
+	path = lib/spinner
+	url = https://github.com/Malabarba/spinner.el
+[submodule "treemacs"]
+	path = lib/treemacs
+	url = https://github.com/Alexander-Miller/treemacs
+	load-path = src/elisp/
 [submodule "vertico"]
 	path = lib/vertico
 	url = https://github.com/minad/vertico
@@ -92,6 +134,9 @@
 [submodule "writegood-mode"]
 	path = lib/writegood-mode
 	url = https://github.com/bnbeckwith/writegood-mode
+[submodule "yaml"]
+	path = lib/yaml
+	url = https://github.com/zkry/yaml.el
 [submodule "zig-mode"]
 	path = lib/zig-mode
 	url = https://github.com/ziglang/zig-mode
