@@ -6,9 +6,15 @@
   (when (< emacs-major-version 29)
     (load (locate-user-emacs-file "shim/29.1.el"))))
 
-;; TODO: split WSL off into a wsl.el to be loaded on WSL
-;; Not portable, but my WSL setup is my WSL setup
-(defconst is-wsl (string= "alpine-wsl" (system-name)))
+;; Sketchy since `operating-system-release' is deprecated, but it
+;; seems to be the only good way to detect WSL, since it get the
+;; kernel's info rather than the userspace's.
+(defconst is-wsl
+  (eval-when-compile
+    (add-to-list 'byte-compile-not-obsolete-vars
+		 'operating-system-release)
+    (string-match "-[Mm]icrosoft" operating-system-release)))
+
 (when is-wsl
   (set-face-attribute 'default nil :height 90))
 
