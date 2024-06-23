@@ -112,6 +112,9 @@
 [submodule "posframe"]
 	path = lib/posframe
 	url = https://github.com/tumashu/posframe
+[submodule "reformatter"]
+	path = lib/reformatter
+	url = https://github.com/purcell/emacs-reformatter
 [submodule "s"]
 	path = lib/s
 	url = https://github.com/magnars/s.el
