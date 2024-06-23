@@ -228,7 +228,7 @@ always loads another light ef-theme and the same for dark."
 (with-eval-after-load 'magit
   (declare-function magit-add-section-hook "magit")
   (magit-add-section-hook 'magit-status-sections-hook
-                          'magit-insert-modules
+                          ;; 'magit-insert-modules
                           'magit-insert-stashes
                           'append))
 
