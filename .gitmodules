@@ -118,6 +118,9 @@
 [submodule "spinner"]
 	path = lib/spinner
 	url = https://github.com/Malabarba/spinner.el
+[submodule "transient"]
+	path = lib/transient
+	url = https://github.com/magit/transient
 [submodule "treemacs"]
 	path = lib/treemacs
 	url = https://github.com/Alexander-Miller/treemacs
