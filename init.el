@@ -227,8 +227,10 @@ always loads another light ef-theme and the same for dark."
 ;; magit
 (with-eval-after-load 'magit
   (declare-function magit-add-section-hook "magit")
+  (setc magit-module-sections-hook '(magit-insert-modules-overview)
+	magit-module-sections-nested nil)
   (magit-add-section-hook 'magit-status-sections-hook
-                          ;; 'magit-insert-modules
+                          'magit-insert-modules
                           'magit-insert-stashes
                           'append))
 
