@@ -145,6 +145,7 @@ on startup if even conceivably possible."
 (mood-line-mode +1)
 
 ;; ligatures
+(require 'ligature)
 (ligature-set-ligatures
    'prog-mode
    '(; Group A
