@@ -85,8 +85,7 @@ on startup if even conceivably possible."
 
 ;; no-littering
 (require 'no-littering)
-(setc auto-save-file-name-transforms
-      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+(no-littering-theme-backups)
 
 ;; minibuffer performance tweaks 
 (let ((restore:gc-cons-threshold gc-cons-threshold))
@@ -275,6 +274,12 @@ STR is current-kill if unspecified.
 
 (with-eval-after-load 'ox
   (require 'ox-sb))
+
+(setc indent-tabs-mode nil)
+
+(with-eval-after-load 'zig-mode
+  (add-hook 'zig-mode-hook
+	    (lambda () (zig-format-on-save-mode -1))))
 
 ;; (defvar elixir-mode-hook)
 ;; (add-hook 'elixir-mode-hook
